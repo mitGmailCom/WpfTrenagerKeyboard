@@ -5,8 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTrenagerKeyboard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Keybord Trainer" Name="wind" Left="0" Top="0" Initialized="wind_Initialized">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Name="gridForSettings" Margin="0">
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Column="0" Name="gridSettings1" HorizontalAlignment="Left" Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Name="txtBlSpeed">Speed:</TextBlock>
+                <TextBlock Grid.Column="1" Name="txtBlFails">Fails:</TextBlock>
+            </Grid>
+            <Grid Grid.Column="1" Name="gridSettings2" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Name="txtBlDifficult">difficulty:</TextBlock>
+                    <Slider Grid.Column="1" Name="sliderDifficult"></Slider>
+                <CheckBox Grid.Column="3" Name="chBoxUpper">Case Sensitive</CheckBox>
+            </Grid>
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Name="StPanelButtons" HorizontalAlignment="Right" Margin="0,5,0,5">
+            <Button Name="btnStart" HorizontalContentAlignment="Center" Margin="0,0,5,0">Start</Button>
+            <Button Name="btnStop" HorizontalContentAlignment="Center">Stop</Button>
+        </StackPanel>
+        <TextBox Grid.Row="2" Name="txtBoxShowText"></TextBox>
+        <TextBox Grid.Row="3" Name="txtBoxInputText"></TextBox>
+        <Grid Grid.Row="4"></Grid>
     </Grid>
 </Window>
