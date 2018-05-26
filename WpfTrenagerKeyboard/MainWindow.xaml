@@ -6,22 +6,24 @@
         xmlns:local="clr-namespace:WpfTrenagerKeyboard"
         mc:Ignorable="d"
         Title="Keybord Trainer" Name="wind" Left="0" Top="0" Initialized="wind_Initialized">
+    <Window.Resources>
+
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <!--<RowDefinition Height="Auto"></RowDefinition>-->
+            <!--<RowDefinition Height="Auto"></RowDefinition>-->
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Name="gridForSettings" Margin="0">
-        <Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" HorizontalAlignment="Stretch" Name="gridForSettings" Margin="0">
+            <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
-            <Grid Grid.Column="0" Name="gridSettings1" HorizontalAlignment="Left" Margin="0">
+            <Grid Grid.Column="0" Name="gridSettings1" HorizontalAlignment="Stretch" Margin="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -29,23 +31,274 @@
                 <TextBlock Grid.Column="0" Name="txtBlSpeed">Speed:</TextBlock>
                 <TextBlock Grid.Column="1" Name="txtBlFails">Fails:</TextBlock>
             </Grid>
-            <Grid Grid.Column="1" Name="gridSettings2" HorizontalAlignment="Right">
+            <Grid Grid.Column="1" Name="gridSettings2" HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Name="txtBlDifficult">difficulty:</TextBlock>
-                    <Slider Grid.Column="1" Name="sliderDifficult"></Slider>
+                <TextBlock Grid.Column="0" Name="txtBlDifficult">Difficulty:</TextBlock>
+                <Slider Grid.Column="1" Name="sliderDifficult"></Slider>
                 <CheckBox Grid.Column="3" Name="chBoxUpper">Case Sensitive</CheckBox>
             </Grid>
         </Grid>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Name="StPanelButtons" HorizontalAlignment="Right" Margin="0,5,0,5">
-            <Button Name="btnStart" HorizontalContentAlignment="Center" Margin="0,0,5,0">Start</Button>
-            <Button Name="btnStop" HorizontalContentAlignment="Center">Stop</Button>
-        </StackPanel>
-        <TextBox Grid.Row="2" Name="txtBoxShowText"></TextBox>
-        <TextBox Grid.Row="3" Name="txtBoxInputText"></TextBox>
-        <Grid Grid.Row="4"></Grid>
+        <Grid Grid.Row="1" Name="StPanelButtons" HorizontalAlignment="Stretch" Margin="0,5,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="2" Name="btnStart" Style="{StaticResource StyleTemplateManage}" HorizontalContentAlignment="Center">Start</Button>
+            <Button Grid.Column="3" Name="btnStop" Style="{StaticResource StyleTemplateManage}" HorizontalContentAlignment="Center" Margin="3,0,0,0">Stop</Button>
+        </Grid>
+        <!--<TextBlock Grid.Row="2" x:Name="txtBlShowText"></TextBlock>
+        <TextBlock Grid.Row="3" x:Name="txtBlInputText"></TextBlock>-->
+
+        <Grid Grid.Row="2" Name="gridForAllKeyboard">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <TextBlock Grid.Row="2" x:Name="txtBlShowText" Background="Aqua">wegesg</TextBlock>
+                <TextBlock Grid.Row="3" x:Name="txtBlInputText" Background="Aqua">gegesgeges</TextBlock>
+            </StackPanel>
+            <Grid Grid.Row="1" Name="firstRowKyeboard">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Grid.ColumnSpan="2">`</Button>
+                <Button Grid.Column="2" Grid.ColumnSpan="2">1</Button>
+                <Button Grid.Column="4" Grid.ColumnSpan="2">2</Button>
+                <Button Grid.Column="6" Grid.ColumnSpan="2">3</Button>
+                <Button Grid.Column="8" Grid.ColumnSpan="2">4</Button>
+                <Button Grid.Column="10" Grid.ColumnSpan="2">5</Button>
+                <Button Grid.Column="12" Grid.ColumnSpan="2">6</Button>
+                <Button Grid.Column="14" Grid.ColumnSpan="2">7</Button>
+                <Button Grid.Column="16" Grid.ColumnSpan="2">8</Button>
+                <Button Grid.Column="18" Grid.ColumnSpan="2">9</Button>
+                <Button Grid.Column="20" Grid.ColumnSpan="2">0</Button>
+                <Button Grid.Column="22" Grid.ColumnSpan="2">-</Button>
+                <Button Grid.Column="24" Grid.ColumnSpan="2">=</Button>
+                <Button Grid.Column="26" Grid.ColumnSpan="4" FontSize="20">Backspace</Button>
+
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Grid.ColumnSpan="3" FontSize="20">Tab</Button>
+                <Button Grid.Column="3" Grid.ColumnSpan="2">q</Button>
+                <Button Grid.Column="5" Grid.ColumnSpan="2">w</Button>
+                <Button Grid.Column="7" Grid.ColumnSpan="2">e</Button>
+                <Button Grid.Column="9" Grid.ColumnSpan="2">r</Button>
+                <Button Grid.Column="11" Grid.ColumnSpan="2">t</Button>
+                <Button Grid.Column="13" Grid.ColumnSpan="2">y</Button>
+                <Button Grid.Column="15" Grid.ColumnSpan="2">u</Button>
+                <Button Grid.Column="17" Grid.ColumnSpan="2">i</Button>
+                <Button Grid.Column="19" Grid.ColumnSpan="2">o</Button>
+                <Button Grid.Column="21" Grid.ColumnSpan="2">p</Button>
+                <Button Grid.Column="23" Grid.ColumnSpan="2">[</Button>
+                <Button Grid.Column="25" Grid.ColumnSpan="2">]</Button>
+                <Button Grid.Column="27" Grid.ColumnSpan="4">\</Button>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Grid.ColumnSpan="4" FontSize="20">Caps Lock</Button>
+                <Button Grid.Column="4" Grid.ColumnSpan="2">a</Button>
+                <Button Grid.Column="6" Grid.ColumnSpan="2">s</Button>
+                <Button Grid.Column="8" Grid.ColumnSpan="2">d</Button>
+                <Button Grid.Column="10" Grid.ColumnSpan="2">f</Button>
+                <Button Grid.Column="12" Grid.ColumnSpan="2">g</Button>
+                <Button Grid.Column="14" Grid.ColumnSpan="2">h</Button>
+                <Button Grid.Column="16" Grid.ColumnSpan="2">j</Button>
+                <Button Grid.Column="18" Grid.ColumnSpan="2">k</Button>
+                <Button Grid.Column="20" Grid.ColumnSpan="2">l</Button>
+                <Button Grid.Column="22" Grid.ColumnSpan="2">;</Button>
+                <Button Grid.Column="24" Grid.ColumnSpan="2">'</Button>
+                <Button Grid.Column="26" Grid.ColumnSpan="4" FontSize="20">Enter</Button>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Grid.ColumnSpan="5" FontSize="20">Shift</Button>
+                <Button Grid.Column="5" Grid.ColumnSpan="2">z</Button>
+                <Button Grid.Column="7" Grid.ColumnSpan="2">x</Button>
+                <Button Grid.Column="9" Grid.ColumnSpan="2">c</Button>
+                <Button Grid.Column="11" Grid.ColumnSpan="2">v</Button>
+                <Button Grid.Column="13" Grid.ColumnSpan="2">b</Button>
+                <Button Grid.Column="15" Grid.ColumnSpan="2">n</Button>
+                <Button Grid.Column="17" Grid.ColumnSpan="2">m</Button>
+                <Button Grid.Column="19" Grid.ColumnSpan="2">,</Button>
+                <Button Grid.Column="21" Grid.ColumnSpan="2">.</Button>
+                <Button Grid.Column="23" Grid.ColumnSpan="2">/</Button>
+                <Button Grid.Column="25" Grid.ColumnSpan="5" FontSize="20">Shift</Button>
+            </Grid>
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Grid.ColumnSpan="3" FontSize="20">Ctrl</Button>
+                <Button Grid.Column="3" Grid.ColumnSpan="3" FontSize="20">Win</Button>
+                <Button Grid.Column="6" Grid.ColumnSpan="3" FontSize="20">Alt</Button>
+                <Button Grid.Column="9" Grid.ColumnSpan="12" FontSize="20">Space</Button>
+                <Button Grid.Column="21" Grid.ColumnSpan="3" FontSize="20">Alt</Button>
+                <Button Grid.Column="24" Grid.ColumnSpan="3" FontSize="20">Win</Button>
+                <Button Grid.Column="27" Grid.ColumnSpan="3" FontSize="20">Ctrl</Button>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

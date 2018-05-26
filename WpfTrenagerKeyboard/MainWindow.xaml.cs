@@ -28,26 +28,27 @@ namespace WpfTrenagerKeyboard
 
         private void wind_Initialized(object sender, EventArgs e)
         {
-            wind.Height = System.Windows.SystemParameters.VirtualScreenWidth * 0.7;
+            wind.Height = System.Windows.SystemParameters.VirtualScreenHeight * 0.6;
             wind.Width = System.Windows.SystemParameters.VirtualScreenWidth;
-            gridSettings1.Width = System.Windows.SystemParameters.VirtualScreenWidth / 2;
-            gridSettings2.Width = System.Windows.SystemParameters.VirtualScreenWidth / 2;
-            btnStart.Width = System.Windows.SystemParameters.VirtualScreenWidth * 0.25;
-            btnStop.Width = System.Windows.SystemParameters.VirtualScreenWidth * 0.25;
-
+            //gridSettings1.Width = System.Windows.SystemParameters.VirtualScreenWidth / 2;
+            //gridSettings2.Width = System.Windows.SystemParameters.VirtualScreenWidth / 2;
+            //btnStart.Width = System.Windows.SystemParameters.VirtualScreenWidth * 0.25;
+            //btnStop.Width = System.Windows.SystemParameters.VirtualScreenWidth * 0.25;
+            //this.Left = SystemParameters.WorkArea.Width - this.Width;
+            //this.Top = SystemParameters.WorkArea.Height - this.Height;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            gridSettings1.Width = wind.Width / 2;
-            gridSettings2.Width = wind.Width / 2;
-            btnStart.Width = wind.Width * 0.25;
-            btnStop.Width = wind.Width * 0.25;
-            double t1 = gridSettings1.Width;
-            double t12 = gridSettings2.Width;
-            double t3 = txtBlDifficult.Width;
-            double t4 = sliderDifficult.Width;
-            //double t5 = 
+            gridSettings1.Width = wind.ActualWidth / 2;
+            gridSettings2.Width = wind.ActualWidth / 2;
+            txtBlShowText.Height = firstRowKyeboard.ActualHeight/2;
+            txtBlInputText.Height = firstRowKyeboard.ActualHeight / 2;
+            //StPanelButtons.Width = wind.ActualWidth;
+            //btnStart.Width = wind.Width * 0.25;
+            //btnStop.Width = wind.Width * 0.25;
+            double t1 = firstRowKyeboard.ActualHeight;
+
         }
 
        
