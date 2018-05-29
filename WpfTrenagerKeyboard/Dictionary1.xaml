@@ -2,21 +2,51 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:WpfTrenagerKeyboard">
     <ControlTemplate x:Key="buttonTemplate" TargetType="Button">
-        <Border CornerRadius="10" BorderThickness="3" BorderBrush="Black" Background="{TemplateBinding Background}">
+        <Border CornerRadius="10" Name="border" BorderThickness="3" BorderBrush="Black" 
+                Background="{TemplateBinding Background}">
             <Grid>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{TemplateBinding FontSize}" Margin="{TemplateBinding Padding}">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{TemplateBinding FontSize}"
+                           Margin="{TemplateBinding Padding}">
                     <StackPanel Orientation="Horizontal">
                         <ContentPresenter></ContentPresenter>
                     </StackPanel>
                 </TextBlock>
             </Grid>
         </Border>
+        
+            <!--<EventTrigger RoutedEvent="KeyDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                           <ColorAnimation Duration="0:0:1"
+
+                            Storyboard.TargetName="border"
+
+                            Storyboard.TargetProperty="Color"
+
+                            To="Red" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>-->
+
+
+            <!--<Trigger Property="Control.IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="Background" Value="Red"></Setter>
+                <Setter TargetName="border" Property="BorderBrush" Value="Yellow">
+                </Setter>
+            </Trigger>-->
+           
+        <!--</ControlTemplate.Triggers>-->
+
     </ControlTemplate>
+    
 
     <ControlTemplate x:Key="buttonTemplateManage" TargetType="Button">
         <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
             <Grid>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{TemplateBinding FontSize}" Margin="{TemplateBinding Padding}">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{TemplateBinding FontSize}"
+                           Margin="{TemplateBinding Padding}">
                     <StackPanel Orientation="Horizontal">
                         <ContentPresenter></ContentPresenter>
                     </StackPanel>
@@ -25,15 +55,99 @@
         </Border>
     </ControlTemplate>
 
+    
+    
     <Style TargetType="Button">
         <Setter Property="Template" Value="{StaticResource buttonTemplate}"></Setter>
-        <Setter Property="FontSize" Value="40"></Setter>
+        <Setter Property="FontSize" Value="38"></Setter>
+        <Setter Property="Margin" Value="2"></Setter>
+        <Style.Triggers>
+            <Trigger Property="IsPressed" Value="True">
+                <!--<Setter TargetName="border" Property="Background" Value="Red"></Setter>
+                <Setter TargetName="border" Property="BorderBrush" Value="Yellow"></Setter>-->
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
-    
-    
 
     <Style TargetType="Button" x:Key="StyleTemplateManage">
         <Setter Property="Template" Value="{StaticResource buttonTemplateManage}"></Setter>
     </Style>
+
+    <!--<RoutedUICommand x:Key="command1" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command2" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command3" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command4" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command5" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command6" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command7" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command8" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command9" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command0" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandMinus" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandTotal" Text="Text"></RoutedUICommand>-->
+
+    <RoutedUICommand x:Key="commandQ" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandWW" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandE" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandR" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandT" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandY" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandU" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandI" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandO" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandP" Text="Text"></RoutedUICommand>
+    <!--<RoutedUICommand x:Key="command[" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command]" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command\" Text="Text"></RoutedUICommand>-->
+
+    <RoutedUICommand x:Key="commandA" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandS" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandD" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandF" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandG" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandH" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandJ" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandK" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandL" Text="Text"></RoutedUICommand>
+    <!--<RoutedUICommand x:Key="command:" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandDblComma" Text="Text"></RoutedUICommand>-->
+
+    <RoutedUICommand x:Key="commandZ" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandX" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandC" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandV" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandB" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandN" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandM" Text="Text"></RoutedUICommand>
+    <!--<RoutedUICommand x:Key="commandTreangleSkobaL" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandTreangleSkobaR" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandTreangleSkobaR>" Text="Text"></RoutedUICommand>-->
     
+
+    <!--<RoutedUICommand x:Key="command`" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandTab" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandCL" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandLShift" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandLCtrl" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandLWin" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandLAlt" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandSpace" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandRAlt" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandRWin" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandRCtrl" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandRShift" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandEnter" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandBackSpace" Text="Text"></RoutedUICommand>-->
+    
+    
+
+
+
+
 </ResourceDictionary>
