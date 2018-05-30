@@ -24,8 +24,10 @@ namespace WpfTrenagerKeyboard
     public partial class MainWindow : Window
     {
         bool flagPressButtun = false;
+        List<Key> ListKeysNoSwow;
         public MainWindow()
         {
+            ListKeysNoSwow = new List<Key>() {Key.Tab, Key.LeftCtrl, Key.LWin, Key.LeftAlt, Key.RightAlt, Key.RWin, Key.RightCtrl, Key.Enter };
             InitializeComponent();
             Loaded += MainWindow_Loaded;
         }
@@ -48,7 +50,7 @@ namespace WpfTrenagerKeyboard
 
         private void wind_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            txtBlInputText.Text += e.Key.ToString();
+            //txtBlInputText.Text += e.Key.ToString();
             //MessageBox.Show($"{e.Key}", "PreviewKeyDown");
 
             //var text = $"{e.Key}";
@@ -62,12 +64,12 @@ namespace WpfTrenagerKeyboard
             //  { RoutedEvent = routedEvent }
             //);
 
-            if (e.Key == Key.Q)
-            {
+            //if (e.Key == Key.Q)
+            //{
 
-            }
+            //}
 
-            flagPressButtun = true;
+            //flagPressButtun = true;
             //ButtonAutomationPeer peer = new ButtonAutomationPeer(btnQ);
             //IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
             //invokeProv.Invoke();
@@ -76,10 +78,33 @@ namespace WpfTrenagerKeyboard
 
         private void wind_PreviewKeyUp(object sender, KeyEventArgs e)
         {
-
+            bool flagInListKeysNoSwow = false;
             Button tt = new Button();
             tt = e.Source as Button;
-            txtBlInputText.Text += tt.Content.ToString();
+            if (e.Key == Key.Tab)
+            {
+                txtBlInputText.Text += "    ";
+            }
+
+            if (e.Key == Key.Space)
+            {
+                txtBlInputText.Text += " ";
+            }
+
+            for (int i = 0; i < ListKeysNoSwow.Count; i++)
+            {
+                if (e.Key == ListKeysNoSwow[i])
+                    flagInListKeysNoSwow = true;
+            }
+
+            if (!flagInListKeysNoSwow)
+                txtBlInputText.Text += tt.Content.ToString();
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTilda, new object[] { false });
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { false });
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPlus, new object[] { false });
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTab, new object[] { false });
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { false });
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnWW, new object[] { false });
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnE, new object[] { false });
@@ -152,13 +177,13 @@ namespace WpfTrenagerKeyboard
             //typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { false });
         }
 
-       #endregion
+        #endregion
 
 
 
 
 
-        
+
 
         //private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         //{
@@ -166,16 +191,16 @@ namespace WpfTrenagerKeyboard
 
         //    //btnQ.ClickMode = ClickMode.Press;
         //    btnQ.Focus();
-            
+
         //    if (flagPressButtun)
         //    {
         //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { true });
         //        //typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { false });
-               
+
         //    }
         //    if(!flagPressButtun)
         //    {
-                
+
         //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { false });
         //    }
 
@@ -188,8 +213,30 @@ namespace WpfTrenagerKeyboard
         //}
 
 
+        //private void CommandBinding_Executed_Minus(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    btnSubtract.Focus();
+
+        //    if (!flagPressButtun)
+        //    {
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { false });
+        //    }
+
+        //    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { true });
+        //}
 
 
+        private void CommandBinding_Executed_Tab(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnTab.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTab, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTab, new object[] { true });
+        }
 
         private void CommandBinding_Executed_Q(object sender, ExecutedRoutedEventArgs e)
         {
@@ -527,6 +574,43 @@ namespace WpfTrenagerKeyboard
             }
 
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnM, new object[] { true });
+        }
+
+
+        private void CommandBinding_Executed_Minus(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnSubtract.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Tilda(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnTilda.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTilda, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTilda, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Plus(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnPlus.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPlus, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPlus, new object[] { true });
         }
     }
 }

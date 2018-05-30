@@ -79,6 +79,7 @@
         <Setter Property="Template" Value="{StaticResource buttonTemplateManage}"></Setter>
     </Style>
 
+    <RoutedUICommand x:Key="commandTilda" Text="Text"></RoutedUICommand>
     <!--<RoutedUICommand x:Key="command1" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="command2" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="command3" Text="Text"></RoutedUICommand>
@@ -88,9 +89,9 @@
     <RoutedUICommand x:Key="command7" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="command8" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="command9" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="command0" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command0" Text="Text"></RoutedUICommand>-->
     <RoutedUICommand x:Key="commandMinus" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="commandTotal" Text="Text"></RoutedUICommand>-->
+    <RoutedUICommand x:Key="commandPlus" Text="Text"></RoutedUICommand>
 
     <RoutedUICommand x:Key="commandQ" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandWW" Text="Text"></RoutedUICommand>
@@ -130,9 +131,8 @@
     <RoutedUICommand x:Key="commandTreangleSkobaR>" Text="Text"></RoutedUICommand>-->
     
 
-    <!--<RoutedUICommand x:Key="command`" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandTab" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="commandCL" Text="Text"></RoutedUICommand>
+    <!--<RoutedUICommand x:Key="commandCL" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandLShift" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandLCtrl" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandLWin" Text="Text"></RoutedUICommand>

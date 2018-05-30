@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTrenagerKeyboard"
         mc:Ignorable="d"
-        Title="Keybord Trainer" Name="wind" Left="0" Top="0" Initialized="wind_Initialized" TextInput="wind_TextInput" 
+        Title="Keybord Trainer" Name="wind" Left="0" Top="0" Initialized="wind_Initialized" 
         PreviewKeyUp="wind_PreviewKeyUp" MinHeight="450" MinWidth="850">
 
     <Window.Resources>
@@ -13,6 +13,11 @@
     </Window.Resources>
     
     <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource commandTilda}" Executed="CommandBinding_Executed_Tilda"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandMinus}" Executed="CommandBinding_Executed_Minus"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandPlus}" Executed="CommandBinding_Executed_Plus"></CommandBinding>
+        
+        
         <!--<CommandBinding Command="{StaticResource command1}" Executed="CommandBinding_Executed"></CommandBinding>-->
         <CommandBinding Command="{StaticResource commandQ}" Executed="CommandBinding_Executed_Q"></CommandBinding>
         <CommandBinding Command="{StaticResource commandWW}" Executed="CommandBinding_Executed_W"></CommandBinding>
@@ -46,9 +51,12 @@
         <CommandBinding Command="{StaticResource commandN}" Executed="CommandBinding_Executed_N"></CommandBinding>
         <CommandBinding Command="{StaticResource commandM}" Executed="CommandBinding_Executed_M"></CommandBinding>
 
+
+        <CommandBinding Command="{StaticResource commandTab}" Executed="CommandBinding_Executed_Tab"></CommandBinding>
     </Window.CommandBindings>
     
     <Window.InputBindings>
+        <KeyBinding Key="Oem3" Command="{StaticResource commandTilda}"></KeyBinding>
         <!--<KeyBinding Key="NumPad1" Command="{StaticResource command1}"></KeyBinding>
         <KeyBinding Key="NumPad2" Command="{StaticResource command2}"></KeyBinding>
         <KeyBinding Key="NumPad3" Command="{StaticResource command3}"></KeyBinding>
@@ -58,9 +66,9 @@
         <KeyBinding Key="NumPad7" Command="{StaticResource command7}"></KeyBinding>
         <KeyBinding Key="NumPad8" Command="{StaticResource command8}"></KeyBinding>
         <KeyBinding Key="NumPad9" Command="{StaticResource command9}"></KeyBinding>
-        <KeyBinding Key="NumPad0" Command="{StaticResource command0}"></KeyBinding>
+        <KeyBinding Key="NumPad0" Command="{StaticResource command0}"></KeyBinding>-->
         <KeyBinding Key="OemMinus" Command="{StaticResource commandMinus}"></KeyBinding>
-        <KeyBinding Key="OemPlus" Command="{StaticResource commandTotal}"></KeyBinding>-->
+        <KeyBinding Key="OemPlus" Command="{StaticResource commandPlus}"></KeyBinding>
         
         
         
@@ -105,7 +113,7 @@
 
 
         <!--<KeyBinding Key="" Command="{StaticResource command1}"></KeyBinding>-->
-        <!--<KeyBinding Key="Tab" Command="{StaticResource commandTab}"></KeyBinding>-->
+        <KeyBinding Key="Tab" Command="{StaticResource commandTab}"></KeyBinding>
         <!--<KeyBinding Key="" Command="{StaticResource command1}"></KeyBinding>-->
         <!--<KeyBinding Key="LeftShift" Command="{StaticResource commandLShift}"></KeyBinding>
         <KeyBinding Key="LeftCtrl" Command="{StaticResource commandLCtrl}"></KeyBinding>
@@ -207,20 +215,20 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Grid.ColumnSpan="2" Background="HotPink">`</Button>
-                <Button Grid.Column="2" Grid.ColumnSpan="2" Background="HotPink">1</Button>
-                <Button Grid.Column="4" Grid.ColumnSpan="2" Background="HotPink">2</Button>
-                <Button Grid.Column="6" Grid.ColumnSpan="2" Background="Yellow">3</Button>
-                <Button Grid.Column="8" Grid.ColumnSpan="2" Background="GreenYellow">4</Button>
-                <Button Grid.Column="10" Grid.ColumnSpan="2" Background="DeepSkyBlue">5</Button>
-                <Button Grid.Column="12" Grid.ColumnSpan="2" Background="DeepSkyBlue">6</Button>
-                <Button Grid.Column="14" Grid.ColumnSpan="2" Background="Orchid">7</Button>
-                <Button Grid.Column="16" Grid.ColumnSpan="2" Background="Orchid">8</Button>
-                <Button Grid.Column="18" Grid.ColumnSpan="2" Background="HotPink">9</Button>
-                <Button Grid.Column="20" Grid.ColumnSpan="2" Background="Yellow">0</Button>
-                <Button Grid.Column="22" Grid.ColumnSpan="2" Background="GreenYellow">-</Button>
-                <Button Grid.Column="24" Grid.ColumnSpan="2" Background="GreenYellow">=</Button>
-                <Button Grid.Column="26" Grid.ColumnSpan="4" FontSize="20">Backspace</Button>
+                <Button Grid.Column="0" Grid.ColumnSpan="2" Name="btnTilda" Background="HotPink">`</Button>
+                <Button Grid.Column="2" Grid.ColumnSpan="2" Name="btn1" Background="HotPink">1</Button>
+                <Button Grid.Column="4" Grid.ColumnSpan="2" Name="btn2" Background="HotPink">2</Button>
+                <Button Grid.Column="6" Grid.ColumnSpan="2" Name="btn3" Background="Yellow">3</Button>
+                <Button Grid.Column="8" Grid.ColumnSpan="2" Name="btn4" Background="GreenYellow">4</Button>
+                <Button Grid.Column="10" Grid.ColumnSpan="2" Name="btn5" Background="DeepSkyBlue">5</Button>
+                <Button Grid.Column="12" Grid.ColumnSpan="2" Name="btn6" Background="DeepSkyBlue">6</Button>
+                <Button Grid.Column="14" Grid.ColumnSpan="2" Name="btn7" Background="Orchid">7</Button>
+                <Button Grid.Column="16" Grid.ColumnSpan="2" Name="btn8" Background="Orchid">8</Button>
+                <Button Grid.Column="18" Grid.ColumnSpan="2" Name="btn9" Background="HotPink">9</Button>
+                <Button Grid.Column="20" Grid.ColumnSpan="2" Name="btn0" Background="Yellow">0</Button>
+                <Button Grid.Column="22" Grid.ColumnSpan="2" Name="btnSubtract" Background="GreenYellow">-</Button>
+                <Button Grid.Column="24" Grid.ColumnSpan="2" Name="btnPlus" Background="GreenYellow">=</Button>
+                <Button Grid.Column="26" Grid.ColumnSpan="4" Name="btnBakSpace" FontSize="20">Backspace</Button>
 
             </Grid>
             <Grid Grid.Row="2" Name="secondRowKyeboard">
@@ -256,7 +264,7 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Grid.ColumnSpan="3" FontSize="20">Tab</Button>
+                <Button Grid.Column="0" Grid.ColumnSpan="3" Name="btnTab" FontSize="20">Tab</Button>
                 <Button Grid.Column="3" Grid.ColumnSpan="2" Name="btnQ" IsEnabled="True" Background="HotPink" >q</Button>
                 <Button Grid.Column="5" Grid.ColumnSpan="2" Name="btnWW" Background="Yellow">w</Button>
                 <Button Grid.Column="7" Grid.ColumnSpan="2" Name="btnE" Background="GreenYellow">e</Button>
@@ -304,7 +312,7 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Grid.ColumnSpan="4" FontSize="20">Caps Lock</Button>
+                <Button Grid.Column="0" Grid.ColumnSpan="4" Name="btnCL" FontSize="20">Caps Lock</Button>
                 <Button Grid.Column="4" Grid.ColumnSpan="2" Name="btnA" Background="HotPink">a</Button>
                 <Button Grid.Column="6" Grid.ColumnSpan="2" Name="btnS" Background="Yellow">s</Button>
                 <Button Grid.Column="8" Grid.ColumnSpan="2" Name="btnD" Background="GreenYellow">d</Button>
@@ -316,7 +324,7 @@
                 <Button Grid.Column="20" Grid.ColumnSpan="2" Name="btnL" Background="Yellow">l</Button>
                 <Button Grid.Column="22" Grid.ColumnSpan="2" Background="GreenYellow">;</Button>
                 <Button Grid.Column="24" Grid.ColumnSpan="2" Background="GreenYellow">'</Button>
-                <Button Grid.Column="26" Grid.ColumnSpan="4" FontSize="20">Enter</Button>
+                <Button Grid.Column="26" Grid.ColumnSpan="4" Name="btnEnter" FontSize="20">Enter</Button>
             </Grid>
             <Grid Grid.Row="4" Name="forthRowKyeboard">
                 <Grid.ColumnDefinitions>
@@ -351,7 +359,7 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Grid.ColumnSpan="5" FontSize="20">Shift</Button>
+                <Button Grid.Column="0" Grid.ColumnSpan="5" Name="btnLShift" FontSize="20">Shift</Button>
                 <Button Grid.Column="5" Grid.ColumnSpan="2" Name="btnZ" Background="HotPink">z</Button>
                 <Button Grid.Column="7" Grid.ColumnSpan="2" Name="btnX" Background="Yellow">x</Button>
                 <Button Grid.Column="9" Grid.ColumnSpan="2" Name="btnC" Background="GreenYellow">c</Button>
@@ -359,10 +367,10 @@
                 <Button Grid.Column="13" Grid.ColumnSpan="2" Name="btnB" Background="DeepSkyBlue">b</Button>
                 <Button Grid.Column="15" Grid.ColumnSpan="2" Name="btnN" Background="Orchid">n</Button>
                 <Button Grid.Column="17" Grid.ColumnSpan="2" Name="btnM" Background="Orchid">m</Button>
-                <Button Grid.Column="19" Grid.ColumnSpan="2" Background="HotPink">,</Button>
-                <Button Grid.Column="21" Grid.ColumnSpan="2" Background="Yellow">.</Button>
-                <Button Grid.Column="23" Grid.ColumnSpan="2" Background="GreenYellow">/</Button>
-                <Button Grid.Column="25" Grid.ColumnSpan="5" FontSize="20">Shift</Button>
+                <Button Grid.Column="19" Grid.ColumnSpan="2" Name="btnComa" Background="HotPink">,</Button>
+                <Button Grid.Column="21" Grid.ColumnSpan="2" Name="btnPoint" Background="Yellow">.</Button>
+                <Button Grid.Column="23" Grid.ColumnSpan="2" Name="btnDegre" Background="GreenYellow">/</Button>
+                <Button Grid.Column="25" Grid.ColumnSpan="5" Name="btnPShift" FontSize="20">Shift</Button>
             </Grid>
             <Grid Grid.Row="5" Name="fivethRowKyeboard">
                 <Grid.ColumnDefinitions>
@@ -397,13 +405,13 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Grid.ColumnSpan="3" FontSize="20">Ctrl</Button>
-                <Button Grid.Column="3" Grid.ColumnSpan="3" FontSize="20">Win</Button>
-                <Button Grid.Column="6" Grid.ColumnSpan="3" FontSize="20">Alt</Button>
-                <Button Grid.Column="9" Grid.ColumnSpan="12" FontSize="20" Background="BurlyWood">Space</Button>
-                <Button Grid.Column="21" Grid.ColumnSpan="3" FontSize="20">Alt</Button>
-                <Button Grid.Column="24" Grid.ColumnSpan="3" FontSize="20">Win</Button>
-                <Button Grid.Column="27" Grid.ColumnSpan="3" FontSize="20">Ctrl</Button>
+                <Button Grid.Column="0" Grid.ColumnSpan="3" Name="LCtrl" FontSize="20">Ctrl</Button>
+                <Button Grid.Column="3" Grid.ColumnSpan="3" Name="btnLWin" FontSize="20">Win</Button>
+                <Button Grid.Column="6" Grid.ColumnSpan="3" Name="btnLAlt" FontSize="20">Alt</Button>
+                <Button Grid.Column="9" Grid.ColumnSpan="12" Name="btnSpace" FontSize="20" Background="BurlyWood">Space</Button>
+                <Button Grid.Column="21" Grid.ColumnSpan="3" Name="btnRAlt" FontSize="20">Alt</Button>
+                <Button Grid.Column="24" Grid.ColumnSpan="3" Name="btnRWin" FontSize="20">Win</Button>
+                <Button Grid.Column="27" Grid.ColumnSpan="3" Name="btnRCtrl" FontSize="20">Ctrl</Button>
             </Grid>
         </Grid>
     </Grid>
