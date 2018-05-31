@@ -80,7 +80,7 @@
     </Style>
 
     <RoutedUICommand x:Key="commandTilda" Text="Text"></RoutedUICommand>
-    <!--<RoutedUICommand x:Key="command1" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="command1" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="command2" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="command3" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="command4" Text="Text"></RoutedUICommand>
@@ -89,7 +89,7 @@
     <RoutedUICommand x:Key="command7" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="command8" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="command9" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="command0" Text="Text"></RoutedUICommand>-->
+    <RoutedUICommand x:Key="command0" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandMinus" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandPlus" Text="Text"></RoutedUICommand>
 
@@ -103,9 +103,9 @@
     <RoutedUICommand x:Key="commandI" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandO" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandP" Text="Text"></RoutedUICommand>
-    <!--<RoutedUICommand x:Key="command[" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="command]" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="command\" Text="Text"></RoutedUICommand>-->
+    <RoutedUICommand x:Key="commandLSqSkoba" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandRSqSkoba" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandSlew" Text="Text"></RoutedUICommand>
 
     <RoutedUICommand x:Key="commandA" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandS" Text="Text"></RoutedUICommand>
@@ -116,8 +116,8 @@
     <RoutedUICommand x:Key="commandJ" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandK" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandL" Text="Text"></RoutedUICommand>
-    <!--<RoutedUICommand x:Key="command:" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="commandDblComma" Text="Text"></RoutedUICommand>-->
+    <RoutedUICommand x:Key="commandPointComma" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandUpperRegComma" Text="Text"></RoutedUICommand>
 
     <RoutedUICommand x:Key="commandZ" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandX" Text="Text"></RoutedUICommand>
@@ -126,24 +126,24 @@
     <RoutedUICommand x:Key="commandB" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandN" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandM" Text="Text"></RoutedUICommand>
-    <!--<RoutedUICommand x:Key="commandTreangleSkobaL" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="commandTreangleSkobaR" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="commandTreangleSkobaR>" Text="Text"></RoutedUICommand>-->
+    <RoutedUICommand x:Key="commandComma" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandPoint" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandDevide" Text="Text"></RoutedUICommand>
     
 
     <RoutedUICommand x:Key="commandTab" Text="Text"></RoutedUICommand>
-    <!--<RoutedUICommand x:Key="commandCL" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandCL" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandLShift" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandLCtrl" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandLWin" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandLAlt" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandSpace" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="commandRAlt" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandRAlt"></RoutedUICommand>
     <RoutedUICommand x:Key="commandRWin" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandRCtrl" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandRShift" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandEnter" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="commandBackSpace" Text="Text"></RoutedUICommand>-->
+    <!--<RoutedUICommand x:Key="commandBackSpace" Text="Text"></RoutedUICommand>-->
     
     
 

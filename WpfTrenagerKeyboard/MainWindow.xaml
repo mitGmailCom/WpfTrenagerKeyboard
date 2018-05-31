@@ -13,11 +13,24 @@
     </Window.Resources>
     
     <Window.CommandBindings>
+        <!--Row namber 1-->
         <CommandBinding Command="{StaticResource commandTilda}" Executed="CommandBinding_Executed_Tilda"></CommandBinding>
+        <CommandBinding Command="{StaticResource command1}" Executed="CommandBinding_Executed_Number1"></CommandBinding>
+        <CommandBinding Command="{StaticResource command2}" Executed="CommandBinding_Executed_Number2"></CommandBinding>
+        <CommandBinding Command="{StaticResource command3}" Executed="CommandBinding_Executed_Number3"></CommandBinding>
+        <CommandBinding Command="{StaticResource command4}" Executed="CommandBinding_Executed_Number4"></CommandBinding>
+        <CommandBinding Command="{StaticResource command5}" Executed="CommandBinding_Executed_Number5"></CommandBinding>
+        <CommandBinding Command="{StaticResource command6}" Executed="CommandBinding_Executed_Number6"></CommandBinding>
+        <CommandBinding Command="{StaticResource command7}" Executed="CommandBinding_Executed_Number7"></CommandBinding>
+        <CommandBinding Command="{StaticResource command8}" Executed="CommandBinding_Executed_Number8"></CommandBinding>
+        <CommandBinding Command="{StaticResource command9}" Executed="CommandBinding_Executed_Number9"></CommandBinding>
+        <CommandBinding Command="{StaticResource command0}" Executed="CommandBinding_Executed_Number0"></CommandBinding>
         <CommandBinding Command="{StaticResource commandMinus}" Executed="CommandBinding_Executed_Minus"></CommandBinding>
         <CommandBinding Command="{StaticResource commandPlus}" Executed="CommandBinding_Executed_Plus"></CommandBinding>
-        
-        
+
+
+
+        <!--Row namber 2-->
         <!--<CommandBinding Command="{StaticResource command1}" Executed="CommandBinding_Executed"></CommandBinding>-->
         <CommandBinding Command="{StaticResource commandQ}" Executed="CommandBinding_Executed_Q"></CommandBinding>
         <CommandBinding Command="{StaticResource commandWW}" Executed="CommandBinding_Executed_W"></CommandBinding>
@@ -29,10 +42,13 @@
         <CommandBinding Command="{StaticResource commandI}" Executed="CommandBinding_Executed_I"></CommandBinding>
         <CommandBinding Command="{StaticResource commandO}" Executed="CommandBinding_Executed_O"></CommandBinding>
         <CommandBinding Command="{StaticResource commandP}" Executed="CommandBinding_Executed_P"></CommandBinding>
-        <!--<CommandBinding Command="{StaticResource command[}" Executed="CommandBinding_Executed_SqueSkobaL"></CommandBinding>
-        <CommandBinding Command="{StaticResource command]}" Executed="CommandBinding_Executed_SqueSkobaR"></CommandBinding>-->
-        <!--<CommandBinding Command="{StaticResource commandQ}" Executed="CommandBinding_Executed_Q"></CommandBinding>-->
+        <CommandBinding Command="{StaticResource commandLSqSkoba}" Executed="CommandBinding_Executed_SqueSkobaL"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandRSqSkoba}" Executed="CommandBinding_Executed_SqueSkobaR"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandSlew}" Executed="CommandBinding_Executed_BackSlew"></CommandBinding>
 
+
+
+        <!--Row namber 3-->
         <CommandBinding Command="{StaticResource commandA}" Executed="CommandBinding_Executed_A"></CommandBinding>
         <CommandBinding Command="{StaticResource commandS}" Executed="CommandBinding_Executed_S"></CommandBinding>
         <CommandBinding Command="{StaticResource commandD}" Executed="CommandBinding_Executed_D"></CommandBinding>
@@ -42,7 +58,12 @@
         <CommandBinding Command="{StaticResource commandJ}" Executed="CommandBinding_Executed_J"></CommandBinding>
         <CommandBinding Command="{StaticResource commandK}" Executed="CommandBinding_Executed_K"></CommandBinding>
         <CommandBinding Command="{StaticResource commandL}" Executed="CommandBinding_Executed_L"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandPointComma}" Executed="CommandBinding_Executed_PointComma"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandUpperRegComma}" Executed="CommandBinding_Executed_UpperRegComma"></CommandBinding>
+        <!--<CommandBinding Command="{StaticResource commandEnter}" Executed="CommandBinding_Executed_Enter"></CommandBinding>-->
 
+
+        <!--Row namber 4-->
         <CommandBinding Command="{StaticResource commandZ}" Executed="CommandBinding_Executed_Z"></CommandBinding>
         <CommandBinding Command="{StaticResource commandX}" Executed="CommandBinding_Executed_X"></CommandBinding>
         <CommandBinding Command="{StaticResource commandC}" Executed="CommandBinding_Executed_C"></CommandBinding>
@@ -50,28 +71,46 @@
         <CommandBinding Command="{StaticResource commandB}" Executed="CommandBinding_Executed_B"></CommandBinding>
         <CommandBinding Command="{StaticResource commandN}" Executed="CommandBinding_Executed_N"></CommandBinding>
         <CommandBinding Command="{StaticResource commandM}" Executed="CommandBinding_Executed_M"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandComma}" Executed="CommandBinding_Executed_Comma"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandPoint}" Executed="CommandBinding_Executed_Point"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandDevide}" Executed="CommandBinding_Executed_Devide"></CommandBinding>
 
 
+        <!--Row namber 5 and Modifiers-->
         <CommandBinding Command="{StaticResource commandTab}" Executed="CommandBinding_Executed_Tab"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandCL}" Executed="CommandBinding_Executed_CL"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandLShift}" Executed="CommandBinding_Executed_LShift"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandLCtrl}" Executed="CommandBinding_Executed_LCtrl"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandLWin}" Executed="CommandBinding_Executed_LWin"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandLAlt}" Executed="CommandBinding_Executed_LAlt"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandSpace}" Executed="CommandBinding_Executed_SpaseBtn"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandRAlt}" Executed="CommandBinding_Executed_RAlt"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandRWin}" Executed="CommandBinding_Executed_RWin"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandRCtrl}" Executed="CommandBinding_Executed_RCtrl"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandRShift}" Executed="CommandBinding_Executed_RShift"></CommandBinding>
+        <!--<CommandBinding Command="{StaticResource commandBackSpace}" Executed="CommandBinding_Executed_Backspace"></CommandBinding>-->
     </Window.CommandBindings>
     
     <Window.InputBindings>
+        <!--Row namber 1-->
         <KeyBinding Key="Oem3" Command="{StaticResource commandTilda}"></KeyBinding>
-        <!--<KeyBinding Key="NumPad1" Command="{StaticResource command1}"></KeyBinding>
-        <KeyBinding Key="NumPad2" Command="{StaticResource command2}"></KeyBinding>
-        <KeyBinding Key="NumPad3" Command="{StaticResource command3}"></KeyBinding>
-        <KeyBinding Key="NumPad4" Command="{StaticResource command4}"></KeyBinding>
-        <KeyBinding Key="NumPad5" Command="{StaticResource command5}"></KeyBinding>
-        <KeyBinding Key="NumPad6" Command="{StaticResource command6}"></KeyBinding>
-        <KeyBinding Key="NumPad7" Command="{StaticResource command7}"></KeyBinding>
-        <KeyBinding Key="NumPad8" Command="{StaticResource command8}"></KeyBinding>
-        <KeyBinding Key="NumPad9" Command="{StaticResource command9}"></KeyBinding>
-        <KeyBinding Key="NumPad0" Command="{StaticResource command0}"></KeyBinding>-->
+        <KeyBinding Key="D1" Command="{StaticResource command1}"></KeyBinding>
+        <KeyBinding Key="D2" Command="{StaticResource command2}"></KeyBinding>
+        <KeyBinding Key="D3" Command="{StaticResource command3}"></KeyBinding>
+        <KeyBinding Key="D4" Command="{StaticResource command4}"></KeyBinding>
+        <KeyBinding Key="D5" Command="{StaticResource command5}"></KeyBinding>
+        <KeyBinding Key="D6" Command="{StaticResource command6}"></KeyBinding>
+        <KeyBinding Key="D7" Command="{StaticResource command7}"></KeyBinding>
+        <KeyBinding Key="D8" Command="{StaticResource command8}"></KeyBinding>
+        <KeyBinding Key="D9" Command="{StaticResource command9}"></KeyBinding>
+        <KeyBinding Key="D0" Command="{StaticResource command0}"></KeyBinding>
         <KeyBinding Key="OemMinus" Command="{StaticResource commandMinus}"></KeyBinding>
         <KeyBinding Key="OemPlus" Command="{StaticResource commandPlus}"></KeyBinding>
-        
-        
-        
+        <!--<KeyBinding Key="Backspace" Command="{StaticResource commandBackSpace}"></KeyBinding>-->
+
+
+
+        <!--Row namber 2-->
         <KeyBinding Key="Q" Command="{StaticResource commandQ}"></KeyBinding>
         <KeyBinding Key="W" Command="{StaticResource commandWW}"></KeyBinding>
         <KeyBinding Key="E" Command="{StaticResource commandE}"></KeyBinding>
@@ -82,11 +121,13 @@
         <KeyBinding Key="I" Command="{StaticResource commandI}"></KeyBinding>
         <KeyBinding Key="O" Command="{StaticResource commandO}"></KeyBinding>
         <KeyBinding Key="P" Command="{StaticResource commandP}"></KeyBinding>
-        <!--<KeyBinding Key="Separator" Command="{StaticResource command1}"></KeyBinding>
-        <KeyBinding Key="Separator" Command="{StaticResource command1}"></KeyBinding>
-        <KeyBinding Key="Separator" Command="{StaticResource command1}"></KeyBinding>-->
+        <KeyBinding Key="OemOpenBrackets" Command="{StaticResource commandLSqSkoba}"></KeyBinding>
+        <KeyBinding Key="Oem6" Command="{StaticResource commandRSqSkoba}"></KeyBinding>
+        <KeyBinding Key="Oem5" Command="{StaticResource commandSlew}"></KeyBinding>
 
+        
 
+        <!--Row namber 3-->
         <KeyBinding Key="A" Command="{StaticResource commandA}"></KeyBinding>
         <KeyBinding Key="S" Command="{StaticResource commandS}"></KeyBinding>
         <KeyBinding Key="D" Command="{StaticResource commandD}"></KeyBinding>
@@ -96,10 +137,13 @@
         <KeyBinding Key="J" Command="{StaticResource commandJ}"></KeyBinding>
         <KeyBinding Key="K" Command="{StaticResource commandK}"></KeyBinding>
         <KeyBinding Key="L" Command="{StaticResource commandL}"></KeyBinding>
-        <!--<KeyBinding Key="" Command="{StaticResource command:}"></KeyBinding>
-        <KeyBinding Key="W" Command="{StaticResource commandDblComma}"></KeyBinding>-->
+        <KeyBinding Key="Oem1" Command="{StaticResource commandPointComma}"></KeyBinding>
+        <KeyBinding Key="OemQuotes" Command="{StaticResource commandUpperRegComma}"></KeyBinding>
+        <!--<KeyBinding Key="Return" Command="{StaticResource commandEnter}"></KeyBinding>-->
 
 
+
+        <!--Row namber 4-->
         <KeyBinding Key="Z" Command="{StaticResource commandZ}"></KeyBinding>
         <KeyBinding Key="X" Command="{StaticResource commandX}"></KeyBinding>
         <KeyBinding Key="C" Command="{StaticResource commandC}"></KeyBinding>
@@ -107,25 +151,26 @@
         <KeyBinding Key="B" Command="{StaticResource commandB}"></KeyBinding>
         <KeyBinding Key="N" Command="{StaticResource commandN}"></KeyBinding>
         <KeyBinding Key="M" Command="{StaticResource commandM}"></KeyBinding>
-        <!--<KeyBinding Key="OemComma" Command="{StaticResource commandTreangleSkobaL}"></KeyBinding>
-        <KeyBinding Key="" Command="{StaticResource commandTreangleSkobaR}"></KeyBinding>-->
-        <!--<KeyBinding Key="Divide" Command="{StaticResource command}"></KeyBinding>-->
+        <KeyBinding Key="OemComma" Command="{StaticResource commandComma}"></KeyBinding>
+        <KeyBinding Key="OemPeriod" Command="{StaticResource commandPoint}"></KeyBinding>
+        <KeyBinding Key="OemQuestion" Command="{StaticResource commandDevide}"></KeyBinding>
 
 
-        <!--<KeyBinding Key="" Command="{StaticResource command1}"></KeyBinding>-->
+        
+        <!--Row namber 5 and Modifiers-->
         <KeyBinding Key="Tab" Command="{StaticResource commandTab}"></KeyBinding>
-        <!--<KeyBinding Key="" Command="{StaticResource command1}"></KeyBinding>-->
-        <!--<KeyBinding Key="LeftShift" Command="{StaticResource commandLShift}"></KeyBinding>
-        <KeyBinding Key="LeftCtrl" Command="{StaticResource commandLCtrl}"></KeyBinding>
+        <KeyBinding Key="Capital" Command="{StaticResource commandCL}"></KeyBinding>
+        <KeyBinding Key="LeftShift" Modifiers="Shift" Command="{StaticResource commandLShift}"></KeyBinding>
+        <KeyBinding Key="LeftCtrl" Modifiers="Ctrl" Command="{StaticResource commandLCtrl}"></KeyBinding>
         <KeyBinding Key="LWin" Command="{StaticResource commandLWin}"></KeyBinding>
-        <KeyBinding Key="LeftAlt" Command="{StaticResource commandLAlt}"></KeyBinding>
-        <KeyBinding Key="Space" Command="{StaticResource commandSpace}"></KeyBinding>
-        <KeyBinding Key="RightAlt" Command="{StaticResource commandRAlt}"></KeyBinding>
+        <KeyBinding Key="LeftAlt" Modifiers="Alt" Command="{StaticResource commandLAlt}"></KeyBinding>
+        <KeyBinding Gesture="Space" Command="{StaticResource commandSpace}"></KeyBinding>
+        <KeyBinding Key="RightAlt" Modifiers="Alt" Command="{StaticResource commandRAlt}"></KeyBinding>
         <KeyBinding Key="RWin" Command="{StaticResource commandRWin}"></KeyBinding>
-        <KeyBinding Key="RightCtrl" Command="{StaticResource commandRCtrl}"></KeyBinding>
-        <KeyBinding Key="RightShift" Command="{StaticResource commandRShift}"></KeyBinding>
-        <KeyBinding Key="DbeEnterWordRegisterMode" Command="{StaticResource commandEnter}"></KeyBinding>
-        <KeyBinding Key="Backspace" Command="{StaticResource commandBackSpace}"></KeyBinding>-->
+        <KeyBinding Key="RightCtrl" Modifiers="Ctrl" Command="{StaticResource commandRCtrl}"></KeyBinding>
+        <KeyBinding Key="RightShift" Modifiers="Shift" Command="{StaticResource commandRShift}"></KeyBinding>
+        <!--<KeyBinding Key="DbeEnterWordRegisterMode" Command="{StaticResource commandEnter}"></KeyBinding>-->
+        <!--<KeyBinding Key="Backspace" Command="{StaticResource commandBackSpace}"></KeyBinding>-->
     </Window.InputBindings>
     
     <Grid>
@@ -150,7 +195,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Name="txtBlDifficult">Difficulty:</TextBlock>
-                <Slider Grid.Column="1" Name="sliderDifficult"></Slider>
+                <Slider Grid.Column="1" Name="sliderDifficult" ValueChanged="sliderDifficult_ValueChanged"></Slider>
             </Grid>
             <CheckBox Grid.Column="3" Name="chBoxUpper">Case Sensitive</CheckBox>
         </Grid>
@@ -277,7 +322,7 @@
                 <Button Grid.Column="21" Grid.ColumnSpan="2" Name="btnP" Background="GreenYellow">p</Button>
                 <Button Grid.Column="23" Grid.ColumnSpan="2" Name="btnSqScobaL" Background="GreenYellow">[</Button>
                 <Button Grid.Column="25" Grid.ColumnSpan="2" Name="btnSqScobaR" Background="GreenYellow">]</Button>
-                <Button Grid.Column="27" Grid.ColumnSpan="4" Name="btnBackspace" Background="GreenYellow">\</Button>
+                <Button Grid.Column="27" Grid.ColumnSpan="4" Name="btnBSlew" Background="GreenYellow">\</Button>
             </Grid>
             <Grid Grid.Row="3" Name="thirdRowKyeboard">
                 <Grid.ColumnDefinitions>
@@ -322,8 +367,8 @@
                 <Button Grid.Column="16" Grid.ColumnSpan="2" Name="btnJ" Background="Orchid">j</Button>
                 <Button Grid.Column="18" Grid.ColumnSpan="2" Name="btnK" Background="HotPink">k</Button>
                 <Button Grid.Column="20" Grid.ColumnSpan="2" Name="btnL" Background="Yellow">l</Button>
-                <Button Grid.Column="22" Grid.ColumnSpan="2" Background="GreenYellow">;</Button>
-                <Button Grid.Column="24" Grid.ColumnSpan="2" Background="GreenYellow">'</Button>
+                <Button Grid.Column="22" Grid.ColumnSpan="2" Name="btnPointComma" Background="GreenYellow">;</Button>
+                <Button Grid.Column="24" Grid.ColumnSpan="2" Name="btnUpperComma" Background="GreenYellow">'</Button>
                 <Button Grid.Column="26" Grid.ColumnSpan="4" Name="btnEnter" FontSize="20">Enter</Button>
             </Grid>
             <Grid Grid.Row="4" Name="forthRowKyeboard">
@@ -369,8 +414,8 @@
                 <Button Grid.Column="17" Grid.ColumnSpan="2" Name="btnM" Background="Orchid">m</Button>
                 <Button Grid.Column="19" Grid.ColumnSpan="2" Name="btnComa" Background="HotPink">,</Button>
                 <Button Grid.Column="21" Grid.ColumnSpan="2" Name="btnPoint" Background="Yellow">.</Button>
-                <Button Grid.Column="23" Grid.ColumnSpan="2" Name="btnDegre" Background="GreenYellow">/</Button>
-                <Button Grid.Column="25" Grid.ColumnSpan="5" Name="btnPShift" FontSize="20">Shift</Button>
+                <Button Grid.Column="23" Grid.ColumnSpan="2" Name="btnDevide" Background="GreenYellow">/</Button>
+                <Button Grid.Column="25" Grid.ColumnSpan="5" Name="btnRShift" FontSize="20">Shift</Button>
             </Grid>
             <Grid Grid.Row="5" Name="fivethRowKyeboard">
                 <Grid.ColumnDefinitions>
@@ -405,10 +450,10 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Grid.ColumnSpan="3" Name="LCtrl" FontSize="20">Ctrl</Button>
+                <Button Grid.Column="0" Grid.ColumnSpan="3" Name="btnLCtrl" FontSize="20">Ctrl</Button>
                 <Button Grid.Column="3" Grid.ColumnSpan="3" Name="btnLWin" FontSize="20">Win</Button>
                 <Button Grid.Column="6" Grid.ColumnSpan="3" Name="btnLAlt" FontSize="20">Alt</Button>
-                <Button Grid.Column="9" Grid.ColumnSpan="12" Name="btnSpace" FontSize="20" Background="BurlyWood">Space</Button>
+                <Button Grid.Column="9" Grid.ColumnSpan="12" Name="buttonSpace" Focusable="True" FontSize="20" Background="BurlyWood">Space</Button>
                 <Button Grid.Column="21" Grid.ColumnSpan="3" Name="btnRAlt" FontSize="20">Alt</Button>
                 <Button Grid.Column="24" Grid.ColumnSpan="3" Name="btnRWin" FontSize="20">Win</Button>
                 <Button Grid.Column="27" Grid.ColumnSpan="3" Name="btnRCtrl" FontSize="20">Ctrl</Button>

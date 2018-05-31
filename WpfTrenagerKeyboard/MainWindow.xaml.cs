@@ -23,11 +23,25 @@ namespace WpfTrenagerKeyboard
     /// </summary>
     public partial class MainWindow : Window
     {
-        bool flagPressButtun = false;
-        List<Key> ListKeysNoSwow;
+        private bool flagPressButtun = false;
+        private List<Key> ListKeysNoSwow;
+        private List<string> ListKeysInKeyboard;
+        private int Diffiicult { get; set; }
+        Random rnd;
+        private string Str { get; set; }
         public MainWindow()
         {
-            ListKeysNoSwow = new List<Key>() {Key.Tab, Key.LeftCtrl, Key.LWin, Key.LeftAlt, Key.RightAlt, Key.RWin, Key.RightCtrl, Key.Enter };
+            ListKeysNoSwow = new List<Key>() {Key.Tab, Key.LeftCtrl, Key.LeftShift, Key.LWin, Key.LeftAlt, Key.RightAlt, Key.RWin, Key.RightShift, Key.RightCtrl, Key.Enter, Key.Space };
+            ListKeysInKeyboard = new List<string>()
+            {"1","2","3","4","5","6","7","8","9","0","-","=",
+            "!","@","#","$","%","^","&","*","(",")","_","+",
+            "q","w","e","r","t","y","u","i","o","p","[","]","\\",
+            "Q","W","E","R","T","Y","U","I","O","P","{","}","|",
+            "a","s","d","f","g","h","j","k","l",";","'",
+            "A","S","D","F","G","H","J","K","L",":","\"",
+            "z","x","c","v","b","n","m",",",".","/",
+            "Z","X","C","V","B","N","M","<",">","?",
+            "   "," "};
             InitializeComponent();
             Loaded += MainWindow_Loaded;
         }
@@ -42,14 +56,32 @@ namespace WpfTrenagerKeyboard
         {
             //txtBlShowText.Height = firstRowKyeboard.ActualHeight/2;
             //txtBlInputText.Height = firstRowKyeboard.ActualHeight / 2;
+            if (sliderDifficult != null)
+                Formstr();
         }
 
+        private void Formstr()
+        {
+            for (int i = 0; i < sliderDifficult.Value; i++)
+            {
+                Str += ListKeysInKeyboard[new Random().Next(0, ListKeysInKeyboard.Count)];
+                ShowStr();
+            }
+            
+        }
+
+        private void ShowStr()
+        {
+            txtBlShowText.Text = Str;
+        }
 
 
         #region Events
 
         private void wind_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            buttonSpace.Focusable = true;
+            buttonSpace.Focus();
             //txtBlInputText.Text += e.Key.ToString();
             //MessageBox.Show($"{e.Key}", "PreviewKeyDown");
 
@@ -64,11 +96,7 @@ namespace WpfTrenagerKeyboard
             //  { RoutedEvent = routedEvent }
             //);
 
-            //if (e.Key == Key.Q)
-            //{
-
-            //}
-
+            
             //flagPressButtun = true;
             //ButtonAutomationPeer peer = new ButtonAutomationPeer(btnQ);
             //IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
@@ -86,9 +114,14 @@ namespace WpfTrenagerKeyboard
                 txtBlInputText.Text += "    ";
             }
 
-            if (e.Key == Key.Space)
+            //if (e.Key == Key.Space)
+            //{
+            //    txtBlInputText.Text += " ";
+            //}
+
+            if (e.Key == Key.Enter)
             {
-                txtBlInputText.Text += " ";
+                txtBlInputText.Text += "Enter";
             }
 
             for (int i = 0; i < ListKeysNoSwow.Count; i++)
@@ -100,41 +133,137 @@ namespace WpfTrenagerKeyboard
             if (!flagInListKeysNoSwow)
                 txtBlInputText.Text += tt.Content.ToString();
 
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTilda, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPlus, new object[] { false });
+            if (e.Key == Key.OemTilde)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTilda, new object[] { false });
+            if (e.Key == Key.D1)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn1, new object[] { false });
+            if (e.Key == Key.D2)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn2, new object[] { false });
+            if (e.Key == Key.D3)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn3, new object[] { false });
+            if (e.Key == Key.D4)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn4, new object[] { false });
+            if (e.Key == Key.D5)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn5, new object[] { false });
+            if (e.Key == Key.D6)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn6, new object[] { false });
+            if (e.Key == Key.D7)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn7, new object[] { false });
 
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTab, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnWW, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnE, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnR, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnT, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnY, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnU, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnI, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnO, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnP, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSqScobaL, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSqScobaR, new object[] { false });
+            if (e.Key == Key.D8)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn8, new object[] { false });
+            if (e.Key == Key.D9)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn9, new object[] { false });
+            if (e.Key == Key.D0)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn0, new object[] { false });
+            if (e.Key == Key.OemMinus)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { false });
+            if (e.Key == Key.OemPlus)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPlus, new object[] { false });
+            //typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBakSpace, new object[] { false });
 
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnA, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnS, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnD, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnF, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnG, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnH, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnJ, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnK, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnL, new object[] { false });
+            if (e.Key == Key.Tab)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTab, new object[] { false });
+            if (e.Key == Key.Q)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { false });
+            if (e.Key == Key.W)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnWW, new object[] { false });
+            if (e.Key == Key.E)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnE, new object[] { false });
+            if (e.Key == Key.R)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnR, new object[] { false });
+            if (e.Key == Key.T)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnT, new object[] { false });
+            if (e.Key == Key.Y)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnY, new object[] { false });
+            if (e.Key == Key.U)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnU, new object[] { false });
+            if (e.Key == Key.I)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnI, new object[] { false });
+            if (e.Key == Key.O)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnO, new object[] { false });
+            if (e.Key == Key.P)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnP, new object[] { false });
+            if (e.Key == Key.OemOpenBrackets)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSqScobaL, new object[] { false });
+            if (e.Key == Key.Oem6)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSqScobaR, new object[] { false });
+            if (e.Key == Key.Oem5)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBSlew, new object[] { false });
 
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnZ, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnX, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnC, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnV, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnB, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnN, new object[] { false });
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnM, new object[] { false });
+
+            if (e.Key == Key.A)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnA, new object[] { false });
+            if (e.Key == Key.S)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnS, new object[] { false });
+            if (e.Key == Key.D)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnD, new object[] { false });
+            if (e.Key == Key.F)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnF, new object[] { false });
+            if (e.Key == Key.G)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnG, new object[] { false });
+            if (e.Key == Key.H)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnH, new object[] { false });
+            if (e.Key == Key.J)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnJ, new object[] { false });
+            if (e.Key == Key.K)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnK, new object[] { false });
+            if (e.Key == Key.L)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnL, new object[] { false });
+            if (e.Key == Key.Oem1)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPointComma, new object[] { false });
+            if (e.Key == Key.OemQuotes)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnUpperComma, new object[] { false });
+            if (e.Key == Key.Enter)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { false });
+
+            if (e.Key == Key.Z)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnZ, new object[] { false });
+            if (e.Key == Key.X)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnX, new object[] { false });
+            if (e.Key == Key.C)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnC, new object[] { false });
+            if (e.Key == Key.V)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnV, new object[] { false });
+            if (e.Key == Key.B)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnB, new object[] { false });
+            if (e.Key == Key.N)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnN, new object[] { false });
+            if (e.Key == Key.M)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnM, new object[] { false });
+            if (e.Key == Key.OemComma)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnComa, new object[] { false });
+            if (e.Key == Key.OemPeriod)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPoint, new object[] { false });
+            if (e.Key == Key.OemQuestion)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnDevide, new object[] { false });
+
+
+            if (e.Key == Key.Capital)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnCL, new object[] { false });
+            if (e.Key == Key.LeftShift)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLShift, new object[] { false });
+            if (e.Key == Key.LeftCtrl)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLCtrl, new object[] { false });
+            if (e.Key == Key.LWin)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLWin, new object[] { false });
+            if (e.Key == Key.LeftAlt)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLAlt, new object[] { false });
+            if (e.Key == Key.Space)
+            {
+                buttonSpace.Focusable = true;
+                buttonSpace.Focus();
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(buttonSpace, new object[] { false });
+            }
+            if (e.Key == Key.RightAlt)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRAlt, new object[] { false });
+            if (e.Key == Key.RWin)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRWin, new object[] { false });
+            if (e.Key == Key.RightCtrl)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRCtrl, new object[] { false });
+            if (e.Key == Key.RightShift)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRShift, new object[] { false });
+
         }
                 
 
@@ -226,6 +355,184 @@ namespace WpfTrenagerKeyboard
         //}
 
 
+        // Keyboard Row 1 (14_keys-(13 for input text))
+        //_(` 1 2 3 4 5 6 7 8 9 0 - = Backspace)_
+        private void CommandBinding_Executed_Tilda(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnTilda.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTilda, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTilda, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Number1(object sender, ExecutedRoutedEventArgs e)
+        {
+            btn1.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn1, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn1, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Number2(object sender, ExecutedRoutedEventArgs e)
+        {
+            btn2.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn2, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn2, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Number3(object sender, ExecutedRoutedEventArgs e)
+        {
+            btn3.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn3, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn3, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Number4(object sender, ExecutedRoutedEventArgs e)
+        {
+            btn4.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn4, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn4, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Number5(object sender, ExecutedRoutedEventArgs e)
+        {
+            btn5.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn5, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn5, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Number6(object sender, ExecutedRoutedEventArgs e)
+        {
+            btn6.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn6, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn6, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Number7(object sender, ExecutedRoutedEventArgs e)
+        {
+            btn7.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn7, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn7, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Number8(object sender, ExecutedRoutedEventArgs e)
+        {
+            btn8.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn8, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn8, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Number9(object sender, ExecutedRoutedEventArgs e)
+        {
+            btn9.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn9, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn9, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Number0(object sender, ExecutedRoutedEventArgs e)
+        {
+            btn0.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn0, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btn0, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Minus(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnSubtract.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_Plus(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnPlus.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPlus, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPlus, new object[] { true });
+        }
+
+        //private void CommandBinding_Executed_Backspace(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    btnBakSpace.Focus();
+
+        //    if (!flagPressButtun)
+        //    {
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBakSpace, new object[] { false });
+        //    }
+
+        //    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBakSpace, new object[] { true });
+        //}
+
+
+
+        // Keyboard Row 2 (14_keys-(14 for input text))
+        //_(Tab q w e r t y u i o p [ ] \)_
+
+
+
+
         private void CommandBinding_Executed_Tab(object sender, ExecutedRoutedEventArgs e)
         {
             btnTab.Focus();
@@ -248,6 +555,19 @@ namespace WpfTrenagerKeyboard
             }
 
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { true });
+            wind.Focus();
+        }
+
+        private void CommandBinding_Executed_W(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnWW.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnWW, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnWW, new object[] { true });
         }
 
         private void CommandBinding_Executed_E(object sender, ExecutedRoutedEventArgs e)
@@ -370,19 +690,22 @@ namespace WpfTrenagerKeyboard
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSqScobaR, new object[] { true });
         }
 
-        private void CommandBinding_Executed_W(object sender, ExecutedRoutedEventArgs e)
+        private void CommandBinding_Executed_BackSlew(object sender, ExecutedRoutedEventArgs e)
         {
-            btnWW.Focus();
+            btnBSlew.Focus();
 
             if (!flagPressButtun)
             {
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnWW, new object[] { false });
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBSlew, new object[] { false });
             }
 
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnWW, new object[] { true });
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBSlew, new object[] { true });
         }
 
 
+
+        // Keyboard Row 3 (13_keys-(11 for input text))
+        // _(CapsLock a s d f g h j k l ; ' Enter)_ 
         private void CommandBinding_Executed_A(object sender, ExecutedRoutedEventArgs e)
         {
             btnA.Focus();
@@ -491,7 +814,46 @@ namespace WpfTrenagerKeyboard
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnL, new object[] { true });
         }
 
+        private void CommandBinding_Executed_PointComma(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnPointComma.Focus();
 
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPointComma, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPointComma, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_UpperRegComma(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnUpperComma.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnUpperComma, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnUpperComma, new object[] { true });
+        }
+
+        //private void CommandBinding_Executed_Enter(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    btnEnter.Focus();
+
+        //    if (!flagPressButtun)
+        //    {
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { false });
+        //    }
+
+        //    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { true });
+        //}
+
+
+
+        // Keyboard Row 4 (12_keys-(10 for input text))
+        // _(LeftShift z x c v b n m , . / RightShift)_
         private void CommandBinding_Executed_Z(object sender, ExecutedRoutedEventArgs e)
         {
             btnZ.Focus();
@@ -576,41 +938,192 @@ namespace WpfTrenagerKeyboard
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnM, new object[] { true });
         }
 
-
-        private void CommandBinding_Executed_Minus(object sender, ExecutedRoutedEventArgs e)
+        private void CommandBinding_Executed_Comma(object sender, ExecutedRoutedEventArgs e)
         {
-            btnSubtract.Focus();
+            btnComa.Focus();
 
             if (!flagPressButtun)
             {
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { false });
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnComa, new object[] { false });
             }
 
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { true });
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnComa, new object[] { true });
         }
 
-        private void CommandBinding_Executed_Tilda(object sender, ExecutedRoutedEventArgs e)
+        private void CommandBinding_Executed_Point(object sender, ExecutedRoutedEventArgs e)
         {
-            btnTilda.Focus();
+            btnPoint.Focus();
 
             if (!flagPressButtun)
             {
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTilda, new object[] { false });
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPoint, new object[] { false });
             }
 
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTilda, new object[] { true });
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPoint, new object[] { true });
         }
 
-        private void CommandBinding_Executed_Plus(object sender, ExecutedRoutedEventArgs e)
+        private void CommandBinding_Executed_Devide(object sender, ExecutedRoutedEventArgs e)
         {
-            btnPlus.Focus();
+            btnDevide.Focus();
 
             if (!flagPressButtun)
             {
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPlus, new object[] { false });
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnDevide, new object[] { false });
             }
 
-            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPlus, new object[] { true });
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnDevide, new object[] { true });
+        }
+
+
+
+        // Keyboard Row 5 (7_keys-(1 for input text))
+        // _(LeftCtrl LeftWin LeftAlt Space RightAlt RightWin RightCtrl)_
+
+        private void CommandBinding_Executed_CL(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnCL.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnCL, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnCL, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_LShift(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnLShift.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLShift, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLShift, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_LCtrl(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnLCtrl.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLCtrl, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLCtrl, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_LWin(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnLWin.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLWin, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLWin, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_LAlt(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnLAlt.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLAlt, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLAlt, new object[] { true });
+        }
+
+        //private void CommandBinding_Executed_Space(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    buttonSpace.Focus();
+
+        //    if (!flagPressButtun)
+        //    {
+        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(buttonSpace, new object[] { false });
+        //    }
+
+        //    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(buttonSpace, new object[] { true });
+        //}
+
+        private void CommandBinding_Executed_RAlt(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnRAlt.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRAlt, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRAlt, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_RWin(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnRWin.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRWin, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRWin, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_RCtrl(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnRCtrl.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRCtrl, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRCtrl, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_RShift(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnRShift.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRShift, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRShift, new object[] { true });
+        }
+
+        private void CommandBinding_Executed_SpaseBtn(object sender, ExecutedRoutedEventArgs e)
+        {
+            buttonSpace.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(buttonSpace, new object[] { false });
+            }
+            buttonSpace.Focus();
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(buttonSpace, new object[] { true });
+            buttonSpace.Focus();
+        }
+
+
+
+
+
+
+
+        private void sliderDifficult_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Diffiicult = (int)sliderDifficult.Value;
+            Formstr();
+
         }
     }
 }
+ 
