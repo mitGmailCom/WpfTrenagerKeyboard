@@ -46,34 +46,113 @@ namespace WpfTrenagerKeyboard
             Loaded += MainWindow_Loaded;
         }
 
+
         private void wind_Initialized(object sender, EventArgs e)
         {
             wind.Height = System.Windows.SystemParameters.VirtualScreenHeight * 0.6;
             wind.Width = System.Windows.SystemParameters.VirtualScreenWidth;
         }
 
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            //btnStart.IsEnabled = false;
+            btnStop.IsEnabled = false;
+            if (sliderDifficult.Value > 0)
+            {
+                btnStart.IsEnabled = true;
+                Formstr();
+            }
+
             //txtBlShowText.Height = firstRowKyeboard.ActualHeight/2;
             //txtBlInputText.Height = firstRowKyeboard.ActualHeight / 2;
-            if (sliderDifficult != null)
-                Formstr();
         }
+
 
         private void Formstr()
         {
-            for (int i = 0; i < sliderDifficult.Value; i++)
+            string tempStr = null;
+            for (int i = 0; i < Diffiicult; i++)
             {
-                Str += ListKeysInKeyboard[new Random().Next(0, ListKeysInKeyboard.Count)];
-                ShowStr();
+                tempStr = ListKeysInKeyboard[new Random().Next(0, ListKeysInKeyboard.Count)];
+                FormedStr(tempStr);
             }
             
         }
 
+
+        private void FormedStr(string tempStr)
+        {
+            if (Str.Length > 0)
+            {
+                CheckValueStr(tempStr);
+                if (tempStr == (Str[Str.Length - 1]).ToString())
+                {
+                    tempStr = ListKeysInKeyboard[new Random().Next(0, ListKeysInKeyboard.Count)];
+                    System.Threading.Thread.Sleep(5);
+                    CheckValueStr(tempStr);
+                }
+            }
+
+            if (Str.Length == 0 || Str == null)
+                Str += tempStr;
+            System.Threading.Thread.Sleep(5);
+        }
+
+
+        private void CheckValueStr(string tempStr)
+        {
+            if (tempStr != (Str[Str.Length - 1]).ToString())
+            {
+                Str += tempStr;
+            }
+        }
+
+
         private void ShowStr()
         {
-            txtBlShowText.Text = Str;
+            txtBlShowText.Text = Str+ " " + $"{Diffiicult}"+ " " + $"{Str.Length}" ;
         }
+
+
+        private void sliderDifficult_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Str = "";
+            if (btnStop.IsEnabled)
+            {
+                Title = Keyboard.FocusedElement.ToString();
+                Keyboard.ClearFocus();
+                btnStop.Focus();
+                ButtonAutomationPeer peer = new ButtonAutomationPeer(btnStop);
+                IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                invokeProv.Invoke();
+            }
+            if (sliderDifficult.Value > 4)
+            {
+                Diffiicult = (int)sliderDifficult.Value;
+                txtBlDifficult.Text = Diffiicult.ToString();
+                Formstr();
+            }
+
+        }
+
+
+        private void btnStart_Click(object sender, RoutedEventArgs e)
+        {
+            txtBlShowText.Text = "";
+            if (Str != null)
+                ShowStr();
+            btnStart.IsEnabled = false;
+            btnStop.IsEnabled = true;
+        }
+
+
+        private void btnStop_Click(object sender, RoutedEventArgs e)
+        {
+            btnStop.IsEnabled = false;
+            btnStart.IsEnabled = true;
+        }
+
 
 
         #region Events
@@ -131,7 +210,8 @@ namespace WpfTrenagerKeyboard
             }
 
             if (!flagInListKeysNoSwow)
-                txtBlInputText.Text += tt.Content.ToString();
+                if(tt.Content != null)
+                    txtBlInputText.Text += tt.Content.ToString();
 
             if (e.Key == Key.OemTilde)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTilda, new object[] { false });
@@ -1116,13 +1196,34 @@ namespace WpfTrenagerKeyboard
 
 
 
-
-
-        private void sliderDifficult_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void btnStart_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            Diffiicult = (int)sliderDifficult.Value;
-            Formstr();
+            if (!btnStart.IsEnabled)
+            {
+                btnStart.Background = Brushes.Gray;
+                btnStart.BorderBrush = Brushes.Gray;
+            }
 
+            if (btnStart.IsEnabled)
+            {
+                btnStart.Background = Brushes.LightGray;
+                btnStart.BorderBrush = Brushes.Black;
+            }
+        }
+
+        private void btnStop_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (!btnStop.IsEnabled)
+            {
+                btnStop.Background = Brushes.Gray;
+                btnStop.BorderBrush = Brushes.Gray;
+            }
+
+            if (btnStop.IsEnabled)
+            {
+                btnStop.Background = Brushes.LightGray;
+                btnStop.BorderBrush = Brushes.Black;
+            }
         }
     }
 }
