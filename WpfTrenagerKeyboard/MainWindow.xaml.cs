@@ -27,8 +27,11 @@ namespace WpfTrenagerKeyboard
         private List<Key> ListKeysNoSwow;
         private List<string> ListKeysInKeyboard;
         private int Diffiicult { get; set; }
-        Random rnd;
+        private int count = 0;
+        private int LengthStr { get; set; }
+        private bool endFor = false;
         private string Str { get; set; }
+        List<string> MasSymbols { get; set; }
         public MainWindow()
         {
             ListKeysNoSwow = new List<Key>() {Key.Tab, Key.LeftCtrl, Key.LeftShift, Key.LWin, Key.LeftAlt, Key.RightAlt, Key.RWin, Key.RightShift, Key.RightCtrl, Key.Enter, Key.Space };
@@ -56,28 +59,49 @@ namespace WpfTrenagerKeyboard
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //btnStart.IsEnabled = false;
+            LengthStr = 40;
             btnStop.IsEnabled = false;
+            MasSymbols = new List<string>();
             if (sliderDifficult.Value > 0)
             {
                 btnStart.IsEnabled = true;
                 Formstr();
             }
-
-            //txtBlShowText.Height = firstRowKyeboard.ActualHeight/2;
-            //txtBlInputText.Height = firstRowKyeboard.ActualHeight / 2;
         }
 
 
         private void Formstr()
         {
-            string tempStr = null;
-            for (int i = 0; i < Diffiicult; i++)
+            //string tempStr = null;
+            string tempSymbol = null;
+            List<string> CopyMasSymbols = new List<string>();
+            List<string> TempListSymbols = new List<string>();
+            CopyMasSymbols = ListKeysInKeyboard.ToList();
+            TempListSymbols.Add(" ");
+            CopyMasSymbols.Remove(" ");
+
+            for (int i = 0; i < Diffiicult-1; i++)
             {
-                tempStr = ListKeysInKeyboard[new Random().Next(0, ListKeysInKeyboard.Count)];
-                FormedStr(tempStr);
+                tempSymbol = CopyMasSymbols[new Random().Next(0, CopyMasSymbols.Count)];
+                CopyMasSymbols.Remove(tempSymbol);
+                TempListSymbols.Add(tempSymbol);
             }
-            
+
+            for (int j = 0; j < LengthStr; j++)
+            {
+
+                Str += TempListSymbols[new Random().Next(0, TempListSymbols.Count)];
+                System.Threading.Thread.Sleep(10);
+                //if (Str.Length == LengthStr)
+                //    continue;
+                //endFor = false;
+                //tempSymbol = null;
+                //tempSymbol = CopyMasSymbols[new Random().Next(0, CopyMasSymbols.Count)];
+                //FormedStr(tempStr);
+            }
+
+            ShowStr();
+
         }
 
 
@@ -85,38 +109,54 @@ namespace WpfTrenagerKeyboard
         {
             if (Str.Length > 0)
             {
-                CheckValueStr(tempStr);
-                if (tempStr == (Str[Str.Length - 1]).ToString())
-                {
-                    tempStr = ListKeysInKeyboard[new Random().Next(0, ListKeysInKeyboard.Count)];
-                    System.Threading.Thread.Sleep(5);
-                    CheckValueStr(tempStr);
-                }
+                
+                ValueStrIn(tempStr);
+                if(!endFor)
+                    ValueStrOut(tempStr);
             }
 
             if (Str.Length == 0 || Str == null)
+            {
                 Str += tempStr;
+                endFor = true;
+                Formstr();
+            }
+
             System.Threading.Thread.Sleep(5);
         }
 
-
-        private void CheckValueStr(string tempStr)
+        private void ValueStrOut(string tempStr)
         {
             if (tempStr != (Str[Str.Length - 1]).ToString())
             {
                 Str += tempStr;
+                endFor = true;
+                //Formstr();
             }
         }
 
+        private void ValueStrIn(string tempStr)
+        {
+            if (tempStr == (Str[Str.Length - 1]).ToString())
+            {
+                count++;
+                //tempStr = ListKeysInKeyboard[new Random().Next(0, ListKeysInKeyboard.Count)];
+                System.Threading.Thread.Sleep(5);
+                Formstr();
+            }
+
+        }
 
         private void ShowStr()
         {
-            txtBlShowText.Text = Str+ " " + $"{Diffiicult}"+ " " + $"{Str.Length}" ;
+            txtBlShowText.Text = Str + " - " + $"{Diffiicult}" + " - " + $"{Str.Length}";// +" - " + $"{count}" ;
         }
+
 
 
         private void sliderDifficult_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            count = 0;
             Str = "";
             if (btnStop.IsEnabled)
             {
@@ -127,7 +167,7 @@ namespace WpfTrenagerKeyboard
                 IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
                 invokeProv.Invoke();
             }
-            if (sliderDifficult.Value > 4)
+            if (sliderDifficult.Value > 6)
             {
                 Diffiicult = (int)sliderDifficult.Value;
                 txtBlDifficult.Text = Diffiicult.ToString();
