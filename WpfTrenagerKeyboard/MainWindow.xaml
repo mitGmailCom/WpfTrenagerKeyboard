@@ -197,7 +197,7 @@
                 <TextBlock Grid.Column="0" Name="txtBlDifficult">Difficulty:</TextBlock>
                 <Slider Grid.Column="1" Name="sliderDifficult" ValueChanged="sliderDifficult_ValueChanged" Maximum="36"></Slider>
             </Grid>
-            <CheckBox Grid.Column="3" Name="chBoxUpper">Case Sensitive</CheckBox>
+            <CheckBox Grid.Column="3" Name="chBoxUpper" Checked="chBoxUpper_Checked" Unchecked="chBoxUpper_Unchecked">Case Sensitive</CheckBox>
         </Grid>
         <Grid Grid.Row="1" Name="StPanelButtons" Margin="0,5,0,3">
             <Grid.ColumnDefinitions>

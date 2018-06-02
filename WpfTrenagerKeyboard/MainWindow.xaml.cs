@@ -23,28 +23,43 @@ namespace WpfTrenagerKeyboard
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool FlagCaseSensitive { get; set; }
+        private bool FlagForUpperSymbol { get; set; }
         private bool flagPressButtun = false;
         private List<Key> ListKeysNoSwow;
         private List<string> ListKeysInKeyboard;
+        private List<string> ListKeysInKeyboard2;
         private int Diffiicult { get; set; }
         private int count = 0;
         private int LengthStr { get; set; }
         private bool endFor = false;
         private string Str { get; set; }
         List<string> MasSymbols { get; set; }
+        List<Button> ListButtonsWithKeys { get; set; }
+
         public MainWindow()
         {
             ListKeysNoSwow = new List<Key>() {Key.Tab, Key.LeftCtrl, Key.LeftShift, Key.LWin, Key.LeftAlt, Key.RightAlt, Key.RWin, Key.RightShift, Key.RightCtrl, Key.Enter, Key.Space };
             ListKeysInKeyboard = new List<string>()
-            {"1","2","3","4","5","6","7","8","9","0","-","=",
-            "!","@","#","$","%","^","&","*","(",")","_","+",
-            "q","w","e","r","t","y","u","i","o","p","[","]","\\",
-            "Q","W","E","R","T","Y","U","I","O","P","{","}","|",
-            "a","s","d","f","g","h","j","k","l",";","'",
-            "A","S","D","F","G","H","J","K","L",":","\"",
-            "z","x","c","v","b","n","m",",",".","/",
-            "Z","X","C","V","B","N","M","<",">","?",
-            "   "," "};
+            {
+                "1","2","3","4","5","6","7","8","9","0","-","=",
+                "!","@","#","$","%","^","&","*","(",")","_","+",
+                "q","w","e","r","t","y","u","i","o","p","[","]","\\",
+                "Q","W","E","R","T","Y","U","I","O","P","{","}","|",
+                "a","s","d","f","g","h","j","k","l",";","'",
+                "A","S","D","F","G","H","J","K","L",":","\"",
+                "z","x","c","v","b","n","m",",",".","/",
+                "Z","X","C","V","B","N","M","<",">","?",
+                "   "," "
+            };
+
+            ListKeysInKeyboard2 = new List<string>()
+            {
+                "`","~","1","!","2","@","3","#","4","$","5","%","6","^","7","&","8","*","9","(","0",")","-","_","=","+",
+                "q","Q","w","W","e","E","r","R","t","T","y","Y","u","U","i","I","o","O","p","P","[","{","]","}","\\","|",
+                "a","A","s","S","d","D","f","F","g","G","h","H","j","J","k","K","l","L",";",":","'","\"",
+                "z","Z","x","X","c","C","v","V","b","B","n","N","m","M",",","<",".",">","/","?"
+            };
             InitializeComponent();
             Loaded += MainWindow_Loaded;
         }
@@ -59,9 +74,21 @@ namespace WpfTrenagerKeyboard
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            FlagCaseSensitive = false;
+            FlagForUpperSymbol = false;
+            flagPressButtun = false;
             LengthStr = 40;
             btnStop.IsEnabled = false;
             MasSymbols = new List<string>();
+
+            ListButtonsWithKeys = new List<Button>()
+            {
+                btnTilda,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn0,btnSubtract,btnPlus,
+                btnQ,btnWW,btnE,btnR,btnT,btnY,btnU,btnI,btnO,btnP,btnSqScobaL,btnSqScobaR,btnBSlew,
+                btnA,btnS,btnD,btnF,btnG,btnH,btnJ,btnK,btnL,btnPointComma,btnUpperComma,
+                btnZ,btnX,btnC,btnV,btnB,btnN,btnM,btnComa,btnPoint,btnDevide
+            };
+
             if (sliderDifficult.Value > 0)
             {
                 btnStart.IsEnabled = true;
@@ -72,49 +99,110 @@ namespace WpfTrenagerKeyboard
 
         private void Formstr()
         {
-            //string tempStr = null;
+            // string tempStr = null;
             string tempSymbol = null;
+            
+            // копия символов клавиатуры
             List<string> CopyMasSymbols = new List<string>();
-            List<string> TempListSymbols = new List<string>();
-            CopyMasSymbols = ListKeysInKeyboard.ToList();
-            TempListSymbols.Add(" ");
-            CopyMasSymbols.Remove(" ");
 
-            for (int i = 0; i < Diffiicult-1; i++)
+            // формирование строки с учетом верхнего регистра
+            if (FlagCaseSensitive)
             {
-                tempSymbol = CopyMasSymbols[new Random().Next(0, CopyMasSymbols.Count)];
-                CopyMasSymbols.Remove(tempSymbol);
-                TempListSymbols.Add(tempSymbol);
+                // массив случайных символов из CopyMasSymbols
+                List<string> TempListSymbols = new List<string>();
+                CopyMasSymbols = ListKeysInKeyboard2.ToList();
+
+                // добавляем пробел
+                TempListSymbols.Add(" ");
+
+                // удаляем из массива пробел, чтобы все символы были уникальными
+                CopyMasSymbols.Remove(" ");
+
+                // наполнение случайными символами массива TempListSymbols
+                for (int i = 0; i < Diffiicult - 1; i++)
+                {
+                    tempSymbol = CopyMasSymbols[new Random().Next(0, CopyMasSymbols.Count)];
+                    CopyMasSymbols.Remove(tempSymbol);
+                    TempListSymbols.Add(tempSymbol);
+                }
+
+                // формирование строки из массива TempListSymbols
+                for (int j = 0; j < LengthStr; j++)
+                {
+
+                    Str += TempListSymbols[new Random().Next(0, TempListSymbols.Count)];
+                    System.Threading.Thread.Sleep(10);
+                    //if (Str.Length == LengthStr)
+                    //    continue;
+                    //endFor = false;
+                    //tempSymbol = null;
+                    //tempSymbol = CopyMasSymbols[new Random().Next(0, CopyMasSymbols.Count)];
+                    //FormedStr(tempStr);
+                }
             }
 
-            for (int j = 0; j < LengthStr; j++)
+            // формирование строки без учета верхнего регистра
+            if (!FlagCaseSensitive)
             {
+                // массив случайных символов из CopyMasSymbols
+                List<string> TempListSymbols = new List<string>();
+                CopyMasSymbols = ListKeysInKeyboard2.ToList();
 
-                Str += TempListSymbols[new Random().Next(0, TempListSymbols.Count)];
-                System.Threading.Thread.Sleep(10);
-                //if (Str.Length == LengthStr)
-                //    continue;
-                //endFor = false;
-                //tempSymbol = null;
-                //tempSymbol = CopyMasSymbols[new Random().Next(0, CopyMasSymbols.Count)];
-                //FormedStr(tempStr);
+                for (int i = CopyMasSymbols.Count; i >= 0; i--)
+                {
+                    if (i >= 2)
+                    {
+                        if (i % 2 == 1)
+                            CopyMasSymbols.RemoveAt(i);
+                    }
+                }
+                CopyMasSymbols.RemoveAt(1);
+
+                // добавляем пробел
+                TempListSymbols.Add(" ");
+
+                // удаляем из массива пробел, чтобы все символы были уникальными
+                CopyMasSymbols.Remove(" ");
+
+                // наполнение случайными символами массива TempListSymbols
+                for (int i = 0; i < Diffiicult - 1; i++)
+                {
+                    tempSymbol = CopyMasSymbols[new Random().Next(0, CopyMasSymbols.Count)];
+                    CopyMasSymbols.Remove(tempSymbol);
+                    TempListSymbols.Add(tempSymbol);
+                }
+
+                // формирование строки из массива TempListSymbols
+                for (int j = 0; j < LengthStr; j++)
+                {
+
+                    Str += TempListSymbols[new Random().Next(0, TempListSymbols.Count)];
+                    System.Threading.Thread.Sleep(10);
+                    //if (Str.Length == LengthStr)
+                    //    continue;
+                    //endFor = false;
+                    //tempSymbol = null;
+                    //tempSymbol = CopyMasSymbols[new Random().Next(0, CopyMasSymbols.Count)];
+                    //FormedStr(tempStr);
+                }
             }
 
-            ShowStr();
+            showStr();
 
         }
 
 
         private void FormedStr(string tempStr)
         {
+            // усли длина строки больше 0
             if (Str.Length > 0)
             {
-                
-                ValueStrIn(tempStr);
+                valueStrIn(tempStr);
                 if(!endFor)
-                    ValueStrOut(tempStr);
+                    valueStrOut(tempStr);
             }
 
+            // если длина строки равна 0 или null
             if (Str.Length == 0 || Str == null)
             {
                 Str += tempStr;
@@ -125,7 +213,8 @@ namespace WpfTrenagerKeyboard
             System.Threading.Thread.Sleep(5);
         }
 
-        private void ValueStrOut(string tempStr)
+        // текущий символ = предыдущему символу
+        private void valueStrOut(string tempStr)
         {
             if (tempStr != (Str[Str.Length - 1]).ToString())
             {
@@ -135,7 +224,8 @@ namespace WpfTrenagerKeyboard
             }
         }
 
-        private void ValueStrIn(string tempStr)
+        // текущий символ != предыдущему символу
+        private void valueStrIn(string tempStr)
         {
             if (tempStr == (Str[Str.Length - 1]).ToString())
             {
@@ -147,17 +237,19 @@ namespace WpfTrenagerKeyboard
 
         }
 
-        private void ShowStr()
+        // вывод строки в txtBlShowText
+        private void showStr()
         {
             txtBlShowText.Text = Str + " - " + $"{Diffiicult}" + " - " + $"{Str.Length}";// +" - " + $"{count}" ;
         }
 
-
-
+        // изменение значения в sliderDifficult
         private void sliderDifficult_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             count = 0;
             Str = "";
+
+            // запускаем событие Нажатия btnStop (если btnStop не нажата)
             if (btnStop.IsEnabled)
             {
                 Title = Keyboard.FocusedElement.ToString();
@@ -167,26 +259,28 @@ namespace WpfTrenagerKeyboard
                 IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
                 invokeProv.Invoke();
             }
+
+            // выводим значение количества выбранных символов, если Value в sliderDifficult > 6 символов 
             if (sliderDifficult.Value > 6)
             {
                 Diffiicult = (int)sliderDifficult.Value;
-                txtBlDifficult.Text = Diffiicult.ToString();
+                txtBlDifficult.Text = $"Diffiicult:" + Diffiicult.ToString();
                 Formstr();
             }
 
         }
 
-
+        // обрабатываем событие клика по btnStart
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             txtBlShowText.Text = "";
             if (Str != null)
-                ShowStr();
+                showStr();
             btnStart.IsEnabled = false;
             btnStop.IsEnabled = true;
         }
 
-
+        // обрабатываем событие клика по btnStop
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
             btnStop.IsEnabled = false;
@@ -194,9 +288,15 @@ namespace WpfTrenagerKeyboard
         }
 
 
+        private void changeContentForKeys()
+        {
+
+        }
+
 
         #region Events
 
+        // обработка события нажатия клавиши на клавиатуре
         private void wind_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             buttonSpace.Focusable = true;
@@ -223,6 +323,7 @@ namespace WpfTrenagerKeyboard
         }
 
 
+        // обработка события отпускания клавиши на клавиатуре
         private void wind_PreviewKeyUp(object sender, KeyEventArgs e)
         {
             bool flagInListKeysNoSwow = false;
@@ -253,6 +354,9 @@ namespace WpfTrenagerKeyboard
                 if(tt.Content != null)
                     txtBlInputText.Text += tt.Content.ToString();
 
+
+            // запуск события KeyUp для клавиш клавиатуры
+            #region row1
             if (e.Key == Key.OemTilde)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTilda, new object[] { false });
             if (e.Key == Key.D1)
@@ -281,7 +385,10 @@ namespace WpfTrenagerKeyboard
             if (e.Key == Key.OemPlus)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPlus, new object[] { false });
             //typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBakSpace, new object[] { false });
+            #endregion
 
+
+            #region row2
             if (e.Key == Key.Tab)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnTab, new object[] { false });
             if (e.Key == Key.Q)
@@ -310,8 +417,10 @@ namespace WpfTrenagerKeyboard
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSqScobaR, new object[] { false });
             if (e.Key == Key.Oem5)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBSlew, new object[] { false });
+            #endregion
 
 
+            #region row3
             if (e.Key == Key.A)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnA, new object[] { false });
             if (e.Key == Key.S)
@@ -336,7 +445,10 @@ namespace WpfTrenagerKeyboard
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnUpperComma, new object[] { false });
             if (e.Key == Key.Enter)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { false });
+            #endregion
 
+
+            #region row4
             if (e.Key == Key.Z)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnZ, new object[] { false });
             if (e.Key == Key.X)
@@ -357,8 +469,10 @@ namespace WpfTrenagerKeyboard
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPoint, new object[] { false });
             if (e.Key == Key.OemQuestion)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnDevide, new object[] { false });
+            #endregion
 
 
+            #region row5
             if (e.Key == Key.Capital)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnCL, new object[] { false });
             if (e.Key == Key.LeftShift)
@@ -383,9 +497,10 @@ namespace WpfTrenagerKeyboard
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRCtrl, new object[] { false });
             if (e.Key == Key.RightShift)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRShift, new object[] { false });
+            #endregion
 
         }
-                
+
 
         private void wind_TextInput(object sender, TextCompositionEventArgs e)
         {
@@ -433,49 +548,10 @@ namespace WpfTrenagerKeyboard
 
 
 
+        // Executed для клавиш клавиатуры
 
-        //private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        //{
-
-
-        //    //btnQ.ClickMode = ClickMode.Press;
-        //    btnQ.Focus();
-
-        //    if (flagPressButtun)
-        //    {
-        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { true });
-        //        //typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { false });
-
-        //    }
-        //    if(!flagPressButtun)
-        //    {
-
-        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { false });
-        //    }
-
-        //    if (flagPressButtun)
-        //    {
-        //        flagPressButtun = false;
-        //    }
-
-        //    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { true });
-        //}
-
-
-        //private void CommandBinding_Executed_Minus(object sender, ExecutedRoutedEventArgs e)
-        //{
-        //    btnSubtract.Focus();
-
-        //    if (!flagPressButtun)
-        //    {
-        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { false });
-        //    }
-
-        //    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnSubtract, new object[] { true });
-        //}
-
-
-        // Keyboard Row 1 (14_keys-(13 for input text))
+        #region  Keyboard Row 1 
+        // 14_keys  (13 for input text)
         //_(` 1 2 3 4 5 6 7 8 9 0 - = Backspace)_
         private void CommandBinding_Executed_Tilda(object sender, ExecutedRoutedEventArgs e)
         {
@@ -649,10 +725,10 @@ namespace WpfTrenagerKeyboard
 
         // Keyboard Row 2 (14_keys-(14 for input text))
         //_(Tab q w e r t y u i o p [ ] \)_
+        #endregion
 
 
-
-
+        #region  Keyboard Row 2 
         private void CommandBinding_Executed_Tab(object sender, ExecutedRoutedEventArgs e)
         {
             btnTab.Focus();
@@ -821,10 +897,11 @@ namespace WpfTrenagerKeyboard
 
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBSlew, new object[] { true });
         }
+        #endregion
 
 
-
-        // Keyboard Row 3 (13_keys-(11 for input text))
+        #region Keyboard Row 3
+        // 13_keys  (11 for input text)
         // _(CapsLock a s d f g h j k l ; ' Enter)_ 
         private void CommandBinding_Executed_A(object sender, ExecutedRoutedEventArgs e)
         {
@@ -969,10 +1046,11 @@ namespace WpfTrenagerKeyboard
 
         //    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { true });
         //}
+        #endregion
 
 
-
-        // Keyboard Row 4 (12_keys-(10 for input text))
+        #region  Keyboard Row 4
+        // 12_keys  (10 for input text)
         // _(LeftShift z x c v b n m , . / RightShift)_
         private void CommandBinding_Executed_Z(object sender, ExecutedRoutedEventArgs e)
         {
@@ -1093,10 +1171,11 @@ namespace WpfTrenagerKeyboard
 
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnDevide, new object[] { true });
         }
+        #endregion
 
 
-
-        // Keyboard Row 5 (7_keys-(1 for input text))
+        #region  Keyboard Row 5
+        // 7_keys   (1 for input text)
         // _(LeftCtrl LeftWin LeftAlt Space RightAlt RightWin RightCtrl)_
 
         private void CommandBinding_Executed_CL(object sender, ExecutedRoutedEventArgs e)
@@ -1109,6 +1188,31 @@ namespace WpfTrenagerKeyboard
             }
 
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnCL, new object[] { true });
+
+
+            if (FlagForUpperSymbol)
+            {
+                string tmpSymbol = null;
+                for (int i = 0; i < ListButtonsWithKeys.Count; i++)
+                {
+                    tmpSymbol = ListButtonsWithKeys[i].Content.ToString();
+                    ListButtonsWithKeys[i].Content = ListKeysInKeyboard2[ListKeysInKeyboard2.IndexOf(tmpSymbol) - 1];
+                }
+                FlagForUpperSymbol = false;
+                return;
+            }
+
+            if (!FlagForUpperSymbol)
+            {
+                string tmpSymbol = null;
+                for (int i = 0; i < ListButtonsWithKeys.Count; i++)
+                {
+                    tmpSymbol = ListButtonsWithKeys[i].Content.ToString();
+                    ListButtonsWithKeys[i].Content = ListKeysInKeyboard2[ListKeysInKeyboard2.IndexOf(tmpSymbol) + 1];
+                }
+                FlagForUpperSymbol = true;
+                return;
+            }
         }
 
         private void CommandBinding_Executed_LShift(object sender, ExecutedRoutedEventArgs e)
@@ -1231,7 +1335,7 @@ namespace WpfTrenagerKeyboard
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(buttonSpace, new object[] { true });
             buttonSpace.Focus();
         }
-
+        #endregion
 
 
 
@@ -1264,6 +1368,16 @@ namespace WpfTrenagerKeyboard
                 btnStop.Background = Brushes.LightGray;
                 btnStop.BorderBrush = Brushes.Black;
             }
+        }
+
+        private void chBoxUpper_Checked(object sender, RoutedEventArgs e)
+        {
+            FlagCaseSensitive = true;
+        }
+
+        private void chBoxUpper_Unchecked(object sender, RoutedEventArgs e)
+        {
+            FlagCaseSensitive = false;
         }
     }
 }
