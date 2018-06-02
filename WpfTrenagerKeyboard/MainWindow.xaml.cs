@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace WpfTrenagerKeyboard
 {
@@ -23,11 +24,14 @@ namespace WpfTrenagerKeyboard
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool FlagForShiftPlusKey { get; set; } = false;
+        private bool FlagPressShift { get; set; } = false;
+        private bool FlagForRightShift { get; set; } = false;
         private bool FlagCaseSensitive { get; set; }
         private bool FlagForUpperSymbol { get; set; }
         private bool flagPressButtun = false;
         private List<Key> ListKeysNoSwow;
-        private List<string> ListKeysInKeyboard;
+        //private List<string> ListKeysInKeyboard;
         private List<string> ListKeysInKeyboard2;
         private int Diffiicult { get; set; }
         private int count = 0;
@@ -36,22 +40,24 @@ namespace WpfTrenagerKeyboard
         private string Str { get; set; }
         List<string> MasSymbols { get; set; }
         List<Button> ListButtonsWithKeys { get; set; }
-
+        DispatcherTimer timer;
+        private int sec { get; set; } = 0;
+        
         public MainWindow()
         {
             ListKeysNoSwow = new List<Key>() {Key.Tab, Key.LeftCtrl, Key.LeftShift, Key.LWin, Key.LeftAlt, Key.RightAlt, Key.RWin, Key.RightShift, Key.RightCtrl, Key.Enter, Key.Space };
-            ListKeysInKeyboard = new List<string>()
-            {
-                "1","2","3","4","5","6","7","8","9","0","-","=",
-                "!","@","#","$","%","^","&","*","(",")","_","+",
-                "q","w","e","r","t","y","u","i","o","p","[","]","\\",
-                "Q","W","E","R","T","Y","U","I","O","P","{","}","|",
-                "a","s","d","f","g","h","j","k","l",";","'",
-                "A","S","D","F","G","H","J","K","L",":","\"",
-                "z","x","c","v","b","n","m",",",".","/",
-                "Z","X","C","V","B","N","M","<",">","?",
-                "   "," "
-            };
+            //ListKeysInKeyboard = new List<string>()
+            //{
+            //    "1","2","3","4","5","6","7","8","9","0","-","=",
+            //    "!","@","#","$","%","^","&","*","(",")","_","+",
+            //    "q","w","e","r","t","y","u","i","o","p","[","]","\\",
+            //    "Q","W","E","R","T","Y","U","I","O","P","{","}","|",
+            //    "a","s","d","f","g","h","j","k","l",";","'",
+            //    "A","S","D","F","G","H","J","K","L",":","\"",
+            //    "z","x","c","v","b","n","m",",",".","/",
+            //    "Z","X","C","V","B","N","M","<",">","?",
+            //    "   "," "
+            //};
 
             ListKeysInKeyboard2 = new List<string>()
             {
@@ -74,6 +80,11 @@ namespace WpfTrenagerKeyboard
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            timer = new DispatcherTimer();
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Interval = new TimeSpan(0, 0, 1);
+           
+
             FlagCaseSensitive = false;
             FlagForUpperSymbol = false;
             flagPressButtun = false;
@@ -94,6 +105,11 @@ namespace WpfTrenagerKeyboard
                 btnStart.IsEnabled = true;
                 Formstr();
             }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            sec++;
         }
 
 
@@ -273,11 +289,13 @@ namespace WpfTrenagerKeyboard
         // обрабатываем событие клика по btnStart
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
+            sec = 0;
             txtBlShowText.Text = "";
             if (Str != null)
                 showStr();
             btnStart.IsEnabled = false;
             btnStop.IsEnabled = true;
+            timer.Start();
         }
 
         // обрабатываем событие клика по btnStop
@@ -285,13 +303,42 @@ namespace WpfTrenagerKeyboard
         {
             btnStop.IsEnabled = false;
             btnStart.IsEnabled = true;
+            Title = $"Keybord Trainer   Time - {sec}";
         }
 
 
-        private void changeContentForKeys()
+        private void changeViewShift(Button btn, double value)
         {
-
+            FlagForRightShift = false;
+            btn.RenderTransformOrigin = new Point(0.5, 0.5);
+            ScaleTransform myScaleTransform = new ScaleTransform();
+            myScaleTransform.ScaleY = value;
+            myScaleTransform.ScaleX = value;
+            btn.RenderTransform = myScaleTransform;
         }
+
+        private void changeViewToUpKeys()
+        {
+            string tmpSymbol = null;
+            for (int i = 0; i < ListButtonsWithKeys.Count; i++)
+            {
+                tmpSymbol = ListButtonsWithKeys[i].Content.ToString();
+                ListButtonsWithKeys[i].Content = ListKeysInKeyboard2[ListKeysInKeyboard2.IndexOf(tmpSymbol) + 1];
+            }
+        }
+
+        private void changeViewToLoKeys()
+        {
+            string tmpSymbol = null;
+            for (int i = 0; i < ListButtonsWithKeys.Count; i++)
+            {
+                tmpSymbol = ListButtonsWithKeys[i].Content.ToString();
+                ListButtonsWithKeys[i].Content = ListKeysInKeyboard2[ListKeysInKeyboard2.IndexOf(tmpSymbol) - 1];
+            }
+        }
+
+
+
 
 
         #region Events
@@ -299,60 +346,76 @@ namespace WpfTrenagerKeyboard
         // обработка события нажатия клавиши на клавиатуре
         private void wind_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            buttonSpace.Focusable = true;
-            buttonSpace.Focus();
-            //txtBlInputText.Text += e.Key.ToString();
-            //MessageBox.Show($"{e.Key}", "PreviewKeyDown");
-
-            //var text = $"{e.Key}";
-            //var target = Keyboard.FocusedElement;
-            //var routedEvent = TextCompositionManager.TextInputEvent;
-
-            //target.RaiseEvent(
-            //  new TextCompositionEventArgs(
-            //    InputManager.Current.PrimaryKeyboardDevice,
-            //    new TextComposition(InputManager.Current, target, text))
-            //  { RoutedEvent = routedEvent }
-            //);
-
             
-            //flagPressButtun = true;
-            //ButtonAutomationPeer peer = new ButtonAutomationPeer(btnQ);
-            //IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
-            //invokeProv.Invoke();
+            if (!FlagPressShift)
+            {
+                if (e.Key == Key.LeftShift)
+                {
+                    // Эффект нажатия клавиши
+                    changeViewShift(btnLShift, 0.9);
+
+                    // Смена раскладки на Верхний регистр
+                    changeViewToUpKeys();
+                }
+
+                if (e.Key == Key.RightShift)
+                {
+                    // Эффект нажатия клавиши
+                    changeViewShift(btnRShift, 0.9);
+
+                    // Смена раскладки на Верхний регистр
+                    changeViewToUpKeys();
+                }
+            }
+            FlagPressShift = true;
         }
 
 
         // обработка события отпускания клавиши на клавиатуре
         private void wind_PreviewKeyUp(object sender, KeyEventArgs e)
         {
-            bool flagInListKeysNoSwow = false;
             Button tt = new Button();
-            tt = e.Source as Button;
+            if (!FlagPressShift)
+                tt = e.Source as Button;
+
+
+            
             if (e.Key == Key.Tab)
             {
                 txtBlInputText.Text += "    ";
             }
-
-            //if (e.Key == Key.Space)
-            //{
-            //    txtBlInputText.Text += " ";
-            //}
 
             if (e.Key == Key.Enter)
             {
                 txtBlInputText.Text += "Enter";
             }
 
-            for (int i = 0; i < ListKeysNoSwow.Count; i++)
+
+
+            // //нажата клавиша LeftShift
+            if (e.Key == Key.LeftShift)
             {
-                if (e.Key == ListKeysNoSwow[i])
-                    flagInListKeysNoSwow = true;
+                // Эффект отжатой клавиши
+                changeViewShift(btnLShift, 1.0);
+
+                // Смена раскладки на нижний регистр
+                changeViewToLoKeys();
             }
 
-            if (!flagInListKeysNoSwow)
-                if(tt.Content != null)
-                    txtBlInputText.Text += tt.Content.ToString();
+
+            //нажата клавиша RightShift
+            if (e.Key == Key.RightShift)
+            {
+                // Эффект отжатой клавиши
+                changeViewShift(btnRShift, 1.0);
+
+                // Смена раскладки на нижний регистр
+                changeViewToLoKeys();
+            }
+
+
+           if (tt.Content != null)
+                txtBlInputText.Text += tt.Content.ToString();
 
 
             // запуск события KeyUp для клавиш клавиатуры
@@ -476,7 +539,11 @@ namespace WpfTrenagerKeyboard
             if (e.Key == Key.Capital)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnCL, new object[] { false });
             if (e.Key == Key.LeftShift)
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLShift, new object[] { false });
+            {
+                if(!FlagForShiftPlusKey)
+                    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLShift, new object[] { false });
+            }
+                
             if (e.Key == Key.LeftCtrl)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLCtrl, new object[] { false });
             if (e.Key == Key.LWin)
@@ -499,6 +566,10 @@ namespace WpfTrenagerKeyboard
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRShift, new object[] { false });
             #endregion
 
+            FlagForShiftPlusKey = false;
+            FlagPressShift = false;
+
+            
         }
 
 
@@ -542,7 +613,6 @@ namespace WpfTrenagerKeyboard
         }
 
         #endregion
-
 
 
 
@@ -751,7 +821,6 @@ namespace WpfTrenagerKeyboard
             }
 
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnQ, new object[] { true });
-            wind.Focus();
         }
 
         private void CommandBinding_Executed_W(object sender, ExecutedRoutedEventArgs e)
@@ -1217,14 +1286,36 @@ namespace WpfTrenagerKeyboard
 
         private void CommandBinding_Executed_LShift(object sender, ExecutedRoutedEventArgs e)
         {
+            //btnQ.RenderTransformOrigin = new Point(0.5, 0.5);
+            //ScaleTransform myScaleTransform = new ScaleTransform();
+            //myScaleTransform.ScaleY = 0.9;
+            //myScaleTransform.ScaleX = 0.9;
+            //btnQ.RenderTransform = myScaleTransform;
+
+            
+
             btnLShift.Focus();
 
-            if (!flagPressButtun)
+            if (flagPressButtun)
             {
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLShift, new object[] { false });
             }
 
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLShift, new object[] { true });
+
+            
+
+            //string tmpSymbol = null;
+
+            //if (!FlagForShift)
+            //    for (int i = 0; i < ListButtonsWithKeys.Count; i++)
+            //    {
+            //        tmpSymbol = ListButtonsWithKeys[i].Content.ToString();
+            //        ListButtonsWithKeys[i].Content = ListKeysInKeyboard2[ListKeysInKeyboard2.IndexOf(tmpSymbol) + 1];
+            //    }
+            //FlagForShift = true;
+            //if (btnLShift.IsKeyboardFocused)
+            //    Keyboard.ClearFocus();
         }
 
         private void CommandBinding_Executed_LCtrl(object sender, ExecutedRoutedEventArgs e)
@@ -1379,6 +1470,330 @@ namespace WpfTrenagerKeyboard
         {
             FlagCaseSensitive = false;
         }
+
+
+
+
+        private void ShiftPlusKey()
+        {
+            FlagForShiftPlusKey = true;
+            if (!FlagForRightShift)
+            {
+                btnLShift.RenderTransformOrigin = new Point(0.5, 0.5);
+                ScaleTransform myScaleTransform = new ScaleTransform();
+                myScaleTransform.ScaleY = 0.9;
+                myScaleTransform.ScaleX = 0.9;
+                btnLShift.RenderTransform = myScaleTransform;
+            }
+
+            if (FlagForRightShift)
+            {
+                btnRShift.RenderTransformOrigin = new Point(0.5, 0.5);
+                ScaleTransform myScaleTransform = new ScaleTransform();
+                myScaleTransform.ScaleY = 0.9;
+                myScaleTransform.ScaleX = 0.9;
+                btnRShift.RenderTransform = myScaleTransform;
+            }
+        }
+
+        private void PressButtonWithShift(Button tempBtn)
+        {
+            tempBtn.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(tempBtn, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(tempBtn, new object[] { true });
+            //wind.Focus();
+        }
+
+
+
+
+        private void CommandBinding_Executed_ShiftTilda(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnTilda);
+        }
+
+        private void CommandBinding_Executed_Shift1(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btn1);
+        }
+
+        private void CommandBinding_Executed_Shift2(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btn2);
+        }
+
+        private void CommandBinding_Executed_Shift3(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btn3);
+        }
+
+        private void CommandBinding_Executed_Shift4(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btn4);
+        }
+
+        private void CommandBinding_Executed_Shift5(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btn5);
+        }
+
+        private void CommandBinding_Executed_Shift6(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btn6);
+        }
+
+        private void CommandBinding_Executed_Shift7(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btn7);
+        }
+
+        private void CommandBinding_Executed_Shift8(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btn8);
+        }
+
+        private void CommandBinding_Executed_Shift9(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btn9);
+        }
+
+        private void CommandBinding_Executed_Shift0(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btn0);
+        }
+
+        private void CommandBinding_Executed_ShiftMinus(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnSubtract);
+        }
+
+        private void CommandBinding_Executed_ShiftPlus(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnPlus);
+        }
+
+        private void CommandBinding_Executed_ShiftQ(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnQ);
+        }
+
+        private void CommandBinding_Executed_ShiftW(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnWW);
+        }
+
+        private void CommandBinding_Executed_ShiftE(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnE);
+        }
+
+        private void CommandBinding_Executed_ShiftR(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnR);
+        }
+
+        private void CommandBinding_Executed_ShiftT(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnT);
+        }
+
+        private void CommandBinding_Executed_ShiftY(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnY);
+        }
+
+        private void CommandBinding_Executed_ShiftU(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnU);
+        }
+
+        private void CommandBinding_Executed_ShiftI(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnI);
+        }
+
+        private void CommandBinding_Executed_ShiftO(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnO);
+        }
+
+        private void CommandBinding_Executed_ShiftP(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnP);
+        }
+
+        private void CommandBinding_Executed_ShiftSqSkobaL(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnSqScobaL);
+        }
+
+        private void CommandBinding_Executed_ShiftSqSkobaR(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnSqScobaR);
+        }
+
+        private void CommandBinding_Executed_ShiftBackSlesh(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnBSlew);
+        }
+
+        private void CommandBinding_Executed_ShiftA(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnA);
+        }
+
+        private void CommandBinding_Executed_ShiftS(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnS);
+        }
+
+        private void CommandBinding_Executed_ShiftD(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnD);
+        }
+
+        private void CommandBinding_Executed_ShiftF(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnF);
+        }
+
+        private void CommandBinding_Executed_ShiftG(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnG);
+        }
+
+        private void CommandBinding_Executed_ShiftH(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnH);
+        }
+
+        private void CommandBinding_Executed_ShiftJ(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnJ);
+        }
+
+        private void CommandBinding_Executed_ShiftK(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnK);
+        }
+
+        private void CommandBinding_Executed_ShiftL(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnL);
+        }
+
+        private void CommandBinding_Executed_ShiftPointComma(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnPointComma);
+        }
+
+        private void CommandBinding_Executed_ShiftUpComma(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnUpperComma);
+        }
+
+        private void CommandBinding_Executed_ShiftZ(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnZ);
+        }
+
+        private void CommandBinding_Executed_ShiftX(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnX);
+        }
+
+        private void CommandBinding_Executed_ShiftC(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnC);
+        }
+
+        private void CommandBinding_Executed_ShiftV(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnV);
+        }
+
+        private void CommandBinding_Executed_ShiftB(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnB);
+        }
+
+        private void CommandBinding_Executed_ShiftN(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnN);
+        }
+
+        private void CommandBinding_Executed_ShiftM(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnM);
+        }
+
+        private void CommandBinding_Executed_ShiftComma(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnComa);
+        }
+
+        private void CommandBinding_Executed_ShiftPoint(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnPoint);
+        }
+
+        private void CommandBinding_Executed_ShiftDevide(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShiftPlusKey();
+            PressButtonWithShift(btnDevide);
+        }
+
     }
 }
  

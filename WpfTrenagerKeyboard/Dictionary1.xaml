@@ -144,7 +144,7 @@
 
     <RoutedUICommand x:Key="commandTab" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandCL" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="commandLShift" Text="Text"></RoutedUICommand>
+    <!--<RoutedUICommand x:Key="commandLShift" Text="Text"></RoutedUICommand>-->
     <RoutedUICommand x:Key="commandLCtrl" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandLWin" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandLAlt" Text="Text"></RoutedUICommand>
@@ -152,11 +152,62 @@
     <RoutedUICommand x:Key="commandRAlt"></RoutedUICommand>
     <RoutedUICommand x:Key="commandRWin" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandRCtrl" Text="Text"></RoutedUICommand>
-    <RoutedUICommand x:Key="commandRShift" Text="Text"></RoutedUICommand>
+    <!--<RoutedUICommand x:Key="commandRShift" Text="Text"></RoutedUICommand>-->
     <RoutedUICommand x:Key="commandEnter" Text="Text"></RoutedUICommand>
     <!--<RoutedUICommand x:Key="commandBackSpace" Text="Text"></RoutedUICommand>-->
     
     
+    
+    <RoutedUICommand x:Key="commandShiftTilda" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShift1" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShift2" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShift3" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShift4" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShift5" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShift6" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShift7" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShift8" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShift9" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShift0" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftMinus" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftPlus" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftQ" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftW" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftE" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftR" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftT" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftY" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftU" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftI" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftO" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftP" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftSqSkobaL" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftSqSkobaR" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftBackSlesh" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftA" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftS" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftD" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftF" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftG" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftH" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftJ" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftK" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftL" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftPointComma" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftUpComma" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftZ" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftX" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftC" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftV" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftB" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftN" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftM" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftComma" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftPoint" Text="Text"></RoutedUICommand>
+    <RoutedUICommand x:Key="commandShiftDevide" Text="Text"></RoutedUICommand>
+    
+    <!--<RoutedUICommand x:Key="commandShiftQ" Text="Text"></RoutedUICommand>-->
+
 
 
 

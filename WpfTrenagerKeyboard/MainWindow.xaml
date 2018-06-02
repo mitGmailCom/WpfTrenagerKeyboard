@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTrenagerKeyboard"
         mc:Ignorable="d"
-        Title="Keybord Trainer" Name="wind" Left="0" Top="0" Initialized="wind_Initialized" 
+        Title="Keybord Trainer" Name="wind" Left="0" Top="0" Initialized="wind_Initialized" KeyDown="wind_PreviewKeyDown"
         PreviewKeyUp="wind_PreviewKeyUp" MinHeight="450" MinWidth="850">
 
     <Window.Resources>
@@ -13,6 +13,63 @@
     </Window.Resources>
     
     <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource commandShiftTilda}" Executed="CommandBinding_Executed_ShiftTilda"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShift1}" Executed="CommandBinding_Executed_Shift1"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShift2}" Executed="CommandBinding_Executed_Shift2"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShift3}" Executed="CommandBinding_Executed_Shift3"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShift4}" Executed="CommandBinding_Executed_Shift4"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShift5}" Executed="CommandBinding_Executed_Shift5"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShift6}" Executed="CommandBinding_Executed_Shift6"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShift7}" Executed="CommandBinding_Executed_Shift7"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShift8}" Executed="CommandBinding_Executed_Shift8"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShift9}" Executed="CommandBinding_Executed_Shift9"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShift0}" Executed="CommandBinding_Executed_Shift0"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftMinus}" Executed="CommandBinding_Executed_ShiftMinus"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftPlus}" Executed="CommandBinding_Executed_ShiftPlus"></CommandBinding>
+
+        <CommandBinding Command="{StaticResource commandShiftQ}" Executed="CommandBinding_Executed_ShiftQ"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftW}" Executed="CommandBinding_Executed_ShiftW"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftE}" Executed="CommandBinding_Executed_ShiftE"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftR}" Executed="CommandBinding_Executed_ShiftR"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftT}" Executed="CommandBinding_Executed_ShiftT"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftY}" Executed="CommandBinding_Executed_ShiftY"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftU}" Executed="CommandBinding_Executed_ShiftU"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftI}" Executed="CommandBinding_Executed_ShiftI"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftO}" Executed="CommandBinding_Executed_ShiftO"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftP}" Executed="CommandBinding_Executed_ShiftP"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftSqSkobaL}" Executed="CommandBinding_Executed_ShiftSqSkobaL"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftSqSkobaR}" Executed="CommandBinding_Executed_ShiftSqSkobaR"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftBackSlesh}" Executed="CommandBinding_Executed_ShiftBackSlesh"></CommandBinding>
+
+        <CommandBinding Command="{StaticResource commandShiftA}" Executed="CommandBinding_Executed_ShiftA"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftS}" Executed="CommandBinding_Executed_ShiftS"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftD}" Executed="CommandBinding_Executed_ShiftD"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftF}" Executed="CommandBinding_Executed_ShiftF"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftG}" Executed="CommandBinding_Executed_ShiftG"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftH}" Executed="CommandBinding_Executed_ShiftH"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftJ}" Executed="CommandBinding_Executed_ShiftJ"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftK}" Executed="CommandBinding_Executed_ShiftK"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftL}" Executed="CommandBinding_Executed_ShiftL"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftPointComma}" Executed="CommandBinding_Executed_ShiftPointComma"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftUpComma}" Executed="CommandBinding_Executed_ShiftUpComma"></CommandBinding>
+        
+        <CommandBinding Command="{StaticResource commandShiftZ}" Executed="CommandBinding_Executed_ShiftZ"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftX}" Executed="CommandBinding_Executed_ShiftX"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftC}" Executed="CommandBinding_Executed_ShiftC"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftV}" Executed="CommandBinding_Executed_ShiftV"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftB}" Executed="CommandBinding_Executed_ShiftB"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftN}" Executed="CommandBinding_Executed_ShiftN"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftM}" Executed="CommandBinding_Executed_ShiftM"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftComma}" Executed="CommandBinding_Executed_ShiftComma"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftPoint}" Executed="CommandBinding_Executed_ShiftPoint"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftDevide}" Executed="CommandBinding_Executed_ShiftDevide"></CommandBinding>
+        <!--<CommandBinding Command="{StaticResource commandShiftQ}" Executed="CommandBinding_Executed_ShiftQ"></CommandBinding>
+        <CommandBinding Command="{StaticResource commandShiftQ}" Executed="CommandBinding_Executed_ShiftQ"></CommandBinding>-->
+        
+        
+        
+        
+        
         <!--Row namber 1-->
         <CommandBinding Command="{StaticResource commandTilda}" Executed="CommandBinding_Executed_Tilda"></CommandBinding>
         <CommandBinding Command="{StaticResource command1}" Executed="CommandBinding_Executed_Number1"></CommandBinding>
@@ -79,7 +136,7 @@
         <!--Row namber 5 and Modifiers-->
         <CommandBinding Command="{StaticResource commandTab}" Executed="CommandBinding_Executed_Tab"></CommandBinding>
         <CommandBinding Command="{StaticResource commandCL}" Executed="CommandBinding_Executed_CL"></CommandBinding>
-        <CommandBinding Command="{StaticResource commandLShift}" Executed="CommandBinding_Executed_LShift"></CommandBinding>
+        <!--<CommandBinding Command="{StaticResource commandLShift}" Executed="CommandBinding_Executed_LShift"></CommandBinding>-->
         <CommandBinding Command="{StaticResource commandLCtrl}" Executed="CommandBinding_Executed_LCtrl"></CommandBinding>
         <CommandBinding Command="{StaticResource commandLWin}" Executed="CommandBinding_Executed_LWin"></CommandBinding>
         <CommandBinding Command="{StaticResource commandLAlt}" Executed="CommandBinding_Executed_LAlt"></CommandBinding>
@@ -87,7 +144,7 @@
         <CommandBinding Command="{StaticResource commandRAlt}" Executed="CommandBinding_Executed_RAlt"></CommandBinding>
         <CommandBinding Command="{StaticResource commandRWin}" Executed="CommandBinding_Executed_RWin"></CommandBinding>
         <CommandBinding Command="{StaticResource commandRCtrl}" Executed="CommandBinding_Executed_RCtrl"></CommandBinding>
-        <CommandBinding Command="{StaticResource commandRShift}" Executed="CommandBinding_Executed_RShift"></CommandBinding>
+        <!--<CommandBinding Command="{StaticResource commandRShift}" Executed="CommandBinding_Executed_RShift"></CommandBinding>-->
         <!--<CommandBinding Command="{StaticResource commandBackSpace}" Executed="CommandBinding_Executed_Backspace"></CommandBinding>-->
     </Window.CommandBindings>
     
@@ -108,6 +165,20 @@
         <KeyBinding Key="OemPlus" Command="{StaticResource commandPlus}"></KeyBinding>
         <!--<KeyBinding Key="Backspace" Command="{StaticResource commandBackSpace}"></KeyBinding>-->
 
+        <KeyBinding Key="Oem3" Modifiers="Shift" Command="{StaticResource commandShiftTilda}"></KeyBinding>
+        <KeyBinding Key="D1" Modifiers="Shift" Command="{StaticResource commandShift1}"></KeyBinding>
+        <KeyBinding Key="D2" Modifiers="Shift" Command="{StaticResource commandShift2}"></KeyBinding>
+        <KeyBinding Key="D3" Modifiers="Shift" Command="{StaticResource commandShift3}"></KeyBinding>
+        <KeyBinding Key="D4" Modifiers="Shift" Command="{StaticResource commandShift4}"></KeyBinding>
+        <KeyBinding Key="D5" Modifiers="Shift" Command="{StaticResource commandShift5}"></KeyBinding>
+        <KeyBinding Key="D6" Modifiers="Shift" Command="{StaticResource commandShift6}"></KeyBinding>
+        <KeyBinding Key="D7" Modifiers="Shift" Command="{StaticResource commandShift7}"></KeyBinding>
+        <KeyBinding Key="D8" Modifiers="Shift" Command="{StaticResource commandShift8}"></KeyBinding>
+        <KeyBinding Key="D9" Modifiers="Shift" Command="{StaticResource commandShift9}"></KeyBinding>
+        <KeyBinding Key="D0" Modifiers="Shift" Command="{StaticResource commandShift0}"></KeyBinding>
+        <KeyBinding Key="OemMinus" Modifiers="Shift" Command="{StaticResource commandShiftMinus}"></KeyBinding>
+        <KeyBinding Key="OemPlus" Modifiers="Shift" Command="{StaticResource commandShiftPlus}"></KeyBinding>
+
 
 
         <!--Row namber 2-->
@@ -125,6 +196,21 @@
         <KeyBinding Key="Oem6" Command="{StaticResource commandRSqSkoba}"></KeyBinding>
         <KeyBinding Key="Oem5" Command="{StaticResource commandSlew}"></KeyBinding>
 
+
+        <KeyBinding Key="Q" Modifiers="Shift" Command="{StaticResource commandShiftQ}"></KeyBinding>
+        <KeyBinding Key="W" Modifiers="Shift" Command="{StaticResource commandShiftW}"></KeyBinding>
+        <KeyBinding Key="E" Modifiers="Shift" Command="{StaticResource commandShiftE}"></KeyBinding>
+        <KeyBinding Key="R" Modifiers="Shift" Command="{StaticResource commandShiftR}"></KeyBinding>
+        <KeyBinding Key="T" Modifiers="Shift" Command="{StaticResource commandShiftT}"></KeyBinding>
+        <KeyBinding Key="Y" Modifiers="Shift" Command="{StaticResource commandShiftY}"></KeyBinding>
+        <KeyBinding Key="U" Modifiers="Shift" Command="{StaticResource commandShiftU}"></KeyBinding>
+        <KeyBinding Key="I" Modifiers="Shift" Command="{StaticResource commandShiftI}"></KeyBinding>
+        <KeyBinding Key="O" Modifiers="Shift" Command="{StaticResource commandShiftO}"></KeyBinding>
+        <KeyBinding Key="P" Modifiers="Shift" Command="{StaticResource commandShiftP}"></KeyBinding>
+        <KeyBinding Key="OemOpenBrackets" Modifiers="Shift" Command="{StaticResource commandShiftSqSkobaL}"></KeyBinding>
+        <KeyBinding Key="Oem6" Modifiers="Shift" Command="{StaticResource commandShiftSqSkobaR}"></KeyBinding>
+        <KeyBinding Key="Oem5" Modifiers="Shift" Command="{StaticResource commandShiftBackSlesh}"></KeyBinding>
+
         
 
         <!--Row namber 3-->
@@ -141,6 +227,19 @@
         <KeyBinding Key="OemQuotes" Command="{StaticResource commandUpperRegComma}"></KeyBinding>
         <!--<KeyBinding Key="Return" Command="{StaticResource commandEnter}"></KeyBinding>-->
 
+        <KeyBinding Key="A" Modifiers="Shift" Command="{StaticResource commandShiftA}"></KeyBinding>
+        <KeyBinding Key="S" Modifiers="Shift" Command="{StaticResource commandShiftS}"></KeyBinding>
+        <KeyBinding Key="D" Modifiers="Shift" Command="{StaticResource commandShiftD}"></KeyBinding>
+        <KeyBinding Key="F" Modifiers="Shift" Command="{StaticResource commandShiftF}"></KeyBinding>
+        <KeyBinding Key="G" Modifiers="Shift" Command="{StaticResource commandShiftG}"></KeyBinding>
+        <KeyBinding Key="H" Modifiers="Shift" Command="{StaticResource commandShiftH}"></KeyBinding>
+        <KeyBinding Key="J" Modifiers="Shift" Command="{StaticResource commandShiftJ}"></KeyBinding>
+        <KeyBinding Key="K" Modifiers="Shift" Command="{StaticResource commandShiftK}"></KeyBinding>
+        <KeyBinding Key="L" Modifiers="Shift" Command="{StaticResource commandShiftL}"></KeyBinding>
+        <KeyBinding Key="Oem1" Modifiers="Shift" Command="{StaticResource commandShiftPointComma}"></KeyBinding>
+        <KeyBinding Key="OemQuotes" Modifiers="Shift" Command="{StaticResource commandShiftUpComma}"></KeyBinding>
+        <!--<KeyBinding Key="Return" Command="{StaticResource commandEnter}"></KeyBinding>-->
+
 
 
         <!--Row namber 4-->
@@ -155,12 +254,23 @@
         <KeyBinding Key="OemPeriod" Command="{StaticResource commandPoint}"></KeyBinding>
         <KeyBinding Key="OemQuestion" Command="{StaticResource commandDevide}"></KeyBinding>
 
+        <KeyBinding Key="Z" Modifiers="Shift" Command="{StaticResource commandShiftZ}"></KeyBinding>
+        <KeyBinding Key="X" Modifiers="Shift" Command="{StaticResource commandShiftX}"></KeyBinding>
+        <KeyBinding Key="C" Modifiers="Shift" Command="{StaticResource commandShiftC}"></KeyBinding>
+        <KeyBinding Key="V" Modifiers="Shift" Command="{StaticResource commandShiftV}"></KeyBinding>
+        <KeyBinding Key="B" Modifiers="Shift" Command="{StaticResource commandShiftB}"></KeyBinding>
+        <KeyBinding Key="N" Modifiers="Shift" Command="{StaticResource commandShiftN}"></KeyBinding>
+        <KeyBinding Key="M" Modifiers="Shift" Command="{StaticResource commandShiftM}"></KeyBinding>
+        <KeyBinding Key="OemComma" Modifiers="Shift" Command="{StaticResource commandShiftComma}"></KeyBinding>
+        <KeyBinding Key="OemPeriod" Modifiers="Shift" Command="{StaticResource commandShiftPoint}"></KeyBinding>
+        <KeyBinding Key="OemQuestion" Modifiers="Shift" Command="{StaticResource commandShiftDevide}"></KeyBinding>
 
-        
+
+
         <!--Row namber 5 and Modifiers-->
         <KeyBinding Key="Tab" Command="{StaticResource commandTab}"></KeyBinding>
         <KeyBinding Key="Capital" Command="{StaticResource commandCL}"></KeyBinding>
-        <KeyBinding Key="LeftShift" Modifiers="Shift" Command="{StaticResource commandLShift}"></KeyBinding>
+        <!--<KeyBinding Key="LeftShift" Modifiers="Shift" Command="{StaticResource commandLShift}"></KeyBinding>-->
         <KeyBinding Key="LeftCtrl" Modifiers="Ctrl" Command="{StaticResource commandLCtrl}"></KeyBinding>
         <KeyBinding Key="LWin" Command="{StaticResource commandLWin}"></KeyBinding>
         <KeyBinding Key="LeftAlt" Modifiers="Alt" Command="{StaticResource commandLAlt}"></KeyBinding>
@@ -168,7 +278,7 @@
         <KeyBinding Key="RightAlt" Modifiers="Alt" Command="{StaticResource commandRAlt}"></KeyBinding>
         <KeyBinding Key="RWin" Command="{StaticResource commandRWin}"></KeyBinding>
         <KeyBinding Key="RightCtrl" Modifiers="Ctrl" Command="{StaticResource commandRCtrl}"></KeyBinding>
-        <KeyBinding Key="RightShift" Modifiers="Shift" Command="{StaticResource commandRShift}"></KeyBinding>
+        <!--<KeyBinding Key="RightShift" Modifiers="Shift" Command="{StaticResource commandRShift}"></KeyBinding>-->
         <!--<KeyBinding Key="DbeEnterWordRegisterMode" Command="{StaticResource commandEnter}"></KeyBinding>-->
         <!--<KeyBinding Key="Backspace" Command="{StaticResource commandBackSpace}"></KeyBinding>-->
     </Window.InputBindings>
