@@ -153,8 +153,8 @@
     <RoutedUICommand x:Key="commandRWin" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandRCtrl" Text="Text"></RoutedUICommand>
     <!--<RoutedUICommand x:Key="commandRShift" Text="Text"></RoutedUICommand>-->
-    <RoutedUICommand x:Key="commandEnter" Text="Text"></RoutedUICommand>
-    <!--<RoutedUICommand x:Key="commandBackSpace" Text="Text"></RoutedUICommand>-->
+    <!--<RoutedUICommand x:Key="commandEnter" Text="Text"></RoutedUICommand>-->
+    <RoutedUICommand x:Key="commandBackSpace" Text="Text"></RoutedUICommand>
     
     
     

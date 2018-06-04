@@ -46,18 +46,6 @@ namespace WpfTrenagerKeyboard
         public MainWindow()
         {
             ListKeysNoSwow = new List<Key>() {Key.Tab, Key.LeftCtrl, Key.LeftShift, Key.LWin, Key.LeftAlt, Key.RightAlt, Key.RWin, Key.RightShift, Key.RightCtrl, Key.Enter, Key.Space };
-            //ListKeysInKeyboard = new List<string>()
-            //{
-            //    "1","2","3","4","5","6","7","8","9","0","-","=",
-            //    "!","@","#","$","%","^","&","*","(",")","_","+",
-            //    "q","w","e","r","t","y","u","i","o","p","[","]","\\",
-            //    "Q","W","E","R","T","Y","U","I","O","P","{","}","|",
-            //    "a","s","d","f","g","h","j","k","l",";","'",
-            //    "A","S","D","F","G","H","J","K","L",":","\"",
-            //    "z","x","c","v","b","n","m",",",".","/",
-            //    "Z","X","C","V","B","N","M","<",">","?",
-            //    "   "," "
-            //};
 
             ListKeysInKeyboard2 = new List<string>()
             {
@@ -69,6 +57,7 @@ namespace WpfTrenagerKeyboard
             InitializeComponent();
             Loaded += MainWindow_Loaded;
         }
+
 
 
         private void wind_Initialized(object sender, EventArgs e)
@@ -107,9 +96,22 @@ namespace WpfTrenagerKeyboard
             }
         }
 
+        // изменение размера шрифта в TextBox и TextBlock в зависимости от размера окна
+        private void wind_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            // Hpt=(25.4/DPI*Hpix)/0,35
+            int fontSize = 0;
+            fontSize = (int)((25.4 / 96 * txtBlShowText.ActualHeight) / 0.35);
+            txtBlShowText.FontSize = (int)fontSize * 0.75;
+            txtBlInputText.FontSize = (int)fontSize * 0.75;
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
             sec++;
+            btnStart.Content = $"{sec} секунд";
+            int t = (int)((Convert.ToDouble(txtBlInputText.Text.Length) / Convert.ToDouble(sec*60)) * 3600.0);
+            txtBlSpeed.Text = $"Speed: {t} chars/min";
         }
 
 
@@ -290,12 +292,13 @@ namespace WpfTrenagerKeyboard
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             sec = 0;
-            txtBlShowText.Text = "";
+            txtBlInputText.Clear();
             if (Str != null)
                 showStr();
             btnStart.IsEnabled = false;
             btnStop.IsEnabled = true;
             timer.Start();
+            btnStop.Content = "Stop";
         }
 
         // обрабатываем событие клика по btnStop
@@ -303,18 +306,22 @@ namespace WpfTrenagerKeyboard
         {
             btnStop.IsEnabled = false;
             btnStart.IsEnabled = true;
-            Title = $"Keybord Trainer   Time - {sec}";
+            timer.Stop();
+            btnStart.Content = "Start";
+            btnStop.Content = $"{sec} секунды";
         }
 
 
         private void changeViewShift(Button btn, double value)
         {
+            System.Threading.Thread.Sleep(45);
             FlagForRightShift = false;
             btn.RenderTransformOrigin = new Point(0.5, 0.5);
             ScaleTransform myScaleTransform = new ScaleTransform();
             myScaleTransform.ScaleY = value;
             myScaleTransform.ScaleX = value;
             btn.RenderTransform = myScaleTransform;
+            //btn.RenderTransformOrigin = new Point(0.5, 0.5);
         }
 
         private void changeViewToUpKeys()
@@ -367,6 +374,12 @@ namespace WpfTrenagerKeyboard
                     changeViewToUpKeys();
                 }
             }
+
+            if (e.Key == Key.Enter)
+            {
+                btnEnter.Focus();
+            }
+
             FlagPressShift = true;
         }
 
@@ -374,10 +387,14 @@ namespace WpfTrenagerKeyboard
         // обработка события отпускания клавиши на клавиатуре
         private void wind_PreviewKeyUp(object sender, KeyEventArgs e)
         {
-            Button tt = new Button();
-            if (!FlagPressShift)
-                tt = e.Source as Button;
 
+            var focs = Keyboard.FocusedElement;
+            Button tt = new Button();
+            //if (sender is Button)
+            //{
+                if (!FlagPressShift)
+                    tt = e.Source as Button;
+            //}
 
             
             if (e.Key == Key.Tab)
@@ -385,18 +402,35 @@ namespace WpfTrenagerKeyboard
                 txtBlInputText.Text += "    ";
             }
 
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Space)
             {
-                txtBlInputText.Text += "Enter";
+                txtBlInputText.Text += " ";
             }
 
+            if (e.Key == Key.Enter)
+            {
+                btnEnter.Focusable = true;
+                changeViewShift(btnEnter, 0.9);
+                if (txtBlShowText.Text.Length <= txtBlInputText.Text.Length & txtBlShowText.Text.Length != 0)
+                {
+                    btnStop.Focus();
+                    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnStop, new object[] { false });
+                    return;
+                }
+                System.Threading.Thread.Sleep(3);
+                //typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { true });
+                ButtonAutomationPeer peer = new ButtonAutomationPeer(btnEnter);
+                IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                invokeProv.Invoke();
+
+            }
 
 
             // //нажата клавиша LeftShift
             if (e.Key == Key.LeftShift)
             {
                 // Эффект отжатой клавиши
-                changeViewShift(btnLShift, 1.0);
+                changeViewShift(btnLShift, 0.9);
 
                 // Смена раскладки на нижний регистр
                 changeViewToLoKeys();
@@ -414,8 +448,14 @@ namespace WpfTrenagerKeyboard
             }
 
 
-           if (tt.Content != null)
-                txtBlInputText.Text += tt.Content.ToString();
+                if (tt.Content != null)
+                    if (tt.Content.ToString() != "Tab" && tt.Content.ToString() != "Caps Lock" &&
+                        tt.Content.ToString() != "Ctrl" && tt.Content.ToString() != "Alt" &&
+                        tt.Content.ToString() != "Backspace" && tt.Content.ToString() != "Enter" &&
+                        tt.Content.ToString() != "Win" && tt.Content.ToString() != "Space" && e.Key != Key.Enter)
+                    {
+                        txtBlInputText.Text += tt.Content.ToString();
+                    }
 
 
             // запуск события KeyUp для клавиш клавиатуры
@@ -506,8 +546,8 @@ namespace WpfTrenagerKeyboard
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnPointComma, new object[] { false });
             if (e.Key == Key.OemQuotes)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnUpperComma, new object[] { false });
-            if (e.Key == Key.Enter)
-                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { false });
+            //if (e.Key == Key.Return)
+            //    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { false });
             #endregion
 
 
@@ -548,7 +588,7 @@ namespace WpfTrenagerKeyboard
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLCtrl, new object[] { false });
             if (e.Key == Key.LWin)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLWin, new object[] { false });
-            if (e.Key == Key.LeftAlt)
+            if (e.SystemKey == Key.LeftAlt)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLAlt, new object[] { false });
             if (e.Key == Key.Space)
             {
@@ -556,7 +596,7 @@ namespace WpfTrenagerKeyboard
                 buttonSpace.Focus();
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(buttonSpace, new object[] { false });
             }
-            if (e.Key == Key.RightAlt)
+            if (e.SystemKey == Key.RightAlt)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRAlt, new object[] { false });
             if (e.Key == Key.RWin)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRWin, new object[] { false });
@@ -564,12 +604,12 @@ namespace WpfTrenagerKeyboard
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRCtrl, new object[] { false });
             if (e.Key == Key.RightShift)
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnRShift, new object[] { false });
+            if (e.Key == Key.Back)
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBakSpace, new object[] { false });
             #endregion
 
             FlagForShiftPlusKey = false;
             FlagPressShift = false;
-
-            
         }
 
 
@@ -577,7 +617,7 @@ namespace WpfTrenagerKeyboard
         {
             Grid tempGrid = new Grid();
             KeyConverter convertKey = new KeyConverter();
-            string tempKey;
+            //string tempKey;
             for (int i = 0; i < gridForAllKeyboard.Children.Count; i++)
             {
                 if (i == gridForAllKeyboard.Children.Count - 1)
@@ -813,6 +853,7 @@ namespace WpfTrenagerKeyboard
 
         private void CommandBinding_Executed_Q(object sender, ExecutedRoutedEventArgs e)
         {
+            changeViewShift(btnEnter, 1.0);
             btnQ.Focus();
 
             if (!flagPressButtun)
@@ -1104,17 +1145,18 @@ namespace WpfTrenagerKeyboard
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnUpperComma, new object[] { true });
         }
 
-        //private void CommandBinding_Executed_Enter(object sender, ExecutedRoutedEventArgs e)
-        //{
-        //    btnEnter.Focus();
+        private void CommandBinding_Executed_Enter(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnEnter.Focus();
 
-        //    if (!flagPressButtun)
-        //    {
-        //        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { false });
-        //    }
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { false });
+            }
 
-        //    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { true });
-        //}
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { true });
+
+        }
         #endregion
 
 
@@ -1426,6 +1468,18 @@ namespace WpfTrenagerKeyboard
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(buttonSpace, new object[] { true });
             buttonSpace.Focus();
         }
+
+        private void CommandBinding_Executed_Backspace(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnBakSpace.Focus();
+
+            if (!flagPressButtun)
+            {
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBakSpace, new object[] { false });
+            }
+
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnBakSpace, new object[] { true });
+        }
         #endregion
 
 
@@ -1506,7 +1560,6 @@ namespace WpfTrenagerKeyboard
             }
 
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(tempBtn, new object[] { true });
-            //wind.Focus();
         }
 
 
@@ -1794,6 +1847,16 @@ namespace WpfTrenagerKeyboard
             PressButtonWithShift(btnDevide);
         }
 
+
+
+        private void btnEnter_Click(object sender, RoutedEventArgs e)
+        {
+            changeViewShift(btnEnter, 1.0);
+            //typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { true });
+            //ButtonAutomationPeer peer = new ButtonAutomationPeer(btnEnter);
+            //IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+            //invokeProv.Invoke();
+        }
     }
 }
  

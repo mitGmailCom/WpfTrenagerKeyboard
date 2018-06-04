@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfTrenagerKeyboard"
         mc:Ignorable="d"
         Title="Keybord Trainer" Name="wind" Left="0" Top="0" Initialized="wind_Initialized" KeyDown="wind_PreviewKeyDown"
-        PreviewKeyUp="wind_PreviewKeyUp" MinHeight="450" MinWidth="850">
+        PreviewKeyUp="wind_PreviewKeyUp" MinHeight="450" MinWidth="850" SizeChanged="wind_SizeChanged">
 
     <Window.Resources>
        
@@ -40,7 +40,7 @@
         <CommandBinding Command="{StaticResource commandShiftSqSkobaL}" Executed="CommandBinding_Executed_ShiftSqSkobaL"></CommandBinding>
         <CommandBinding Command="{StaticResource commandShiftSqSkobaR}" Executed="CommandBinding_Executed_ShiftSqSkobaR"></CommandBinding>
         <CommandBinding Command="{StaticResource commandShiftBackSlesh}" Executed="CommandBinding_Executed_ShiftBackSlesh"></CommandBinding>
-
+        
         <CommandBinding Command="{StaticResource commandShiftA}" Executed="CommandBinding_Executed_ShiftA"></CommandBinding>
         <CommandBinding Command="{StaticResource commandShiftS}" Executed="CommandBinding_Executed_ShiftS"></CommandBinding>
         <CommandBinding Command="{StaticResource commandShiftD}" Executed="CommandBinding_Executed_ShiftD"></CommandBinding>
@@ -63,12 +63,7 @@
         <CommandBinding Command="{StaticResource commandShiftComma}" Executed="CommandBinding_Executed_ShiftComma"></CommandBinding>
         <CommandBinding Command="{StaticResource commandShiftPoint}" Executed="CommandBinding_Executed_ShiftPoint"></CommandBinding>
         <CommandBinding Command="{StaticResource commandShiftDevide}" Executed="CommandBinding_Executed_ShiftDevide"></CommandBinding>
-        <!--<CommandBinding Command="{StaticResource commandShiftQ}" Executed="CommandBinding_Executed_ShiftQ"></CommandBinding>
-        <CommandBinding Command="{StaticResource commandShiftQ}" Executed="CommandBinding_Executed_ShiftQ"></CommandBinding>-->
-        
-        
-        
-        
+      
         
         <!--Row namber 1-->
         <CommandBinding Command="{StaticResource commandTilda}" Executed="CommandBinding_Executed_Tilda"></CommandBinding>
@@ -145,8 +140,9 @@
         <CommandBinding Command="{StaticResource commandRWin}" Executed="CommandBinding_Executed_RWin"></CommandBinding>
         <CommandBinding Command="{StaticResource commandRCtrl}" Executed="CommandBinding_Executed_RCtrl"></CommandBinding>
         <!--<CommandBinding Command="{StaticResource commandRShift}" Executed="CommandBinding_Executed_RShift"></CommandBinding>-->
-        <!--<CommandBinding Command="{StaticResource commandBackSpace}" Executed="CommandBinding_Executed_Backspace"></CommandBinding>-->
+        <CommandBinding Command="{StaticResource commandBackSpace}" Executed="CommandBinding_Executed_Backspace"></CommandBinding>
     </Window.CommandBindings>
+    
     
     <Window.InputBindings>
         <!--Row namber 1-->
@@ -196,7 +192,6 @@
         <KeyBinding Key="Oem6" Command="{StaticResource commandRSqSkoba}"></KeyBinding>
         <KeyBinding Key="Oem5" Command="{StaticResource commandSlew}"></KeyBinding>
 
-
         <KeyBinding Key="Q" Modifiers="Shift" Command="{StaticResource commandShiftQ}"></KeyBinding>
         <KeyBinding Key="W" Modifiers="Shift" Command="{StaticResource commandShiftW}"></KeyBinding>
         <KeyBinding Key="E" Modifiers="Shift" Command="{StaticResource commandShiftE}"></KeyBinding>
@@ -211,7 +206,6 @@
         <KeyBinding Key="Oem6" Modifiers="Shift" Command="{StaticResource commandShiftSqSkobaR}"></KeyBinding>
         <KeyBinding Key="Oem5" Modifiers="Shift" Command="{StaticResource commandShiftBackSlesh}"></KeyBinding>
 
-        
 
         <!--Row namber 3-->
         <KeyBinding Key="A" Command="{StaticResource commandA}"></KeyBinding>
@@ -239,7 +233,6 @@
         <KeyBinding Key="Oem1" Modifiers="Shift" Command="{StaticResource commandShiftPointComma}"></KeyBinding>
         <KeyBinding Key="OemQuotes" Modifiers="Shift" Command="{StaticResource commandShiftUpComma}"></KeyBinding>
         <!--<KeyBinding Key="Return" Command="{StaticResource commandEnter}"></KeyBinding>-->
-
 
 
         <!--Row namber 4-->
@@ -279,8 +272,8 @@
         <KeyBinding Key="RWin" Command="{StaticResource commandRWin}"></KeyBinding>
         <KeyBinding Key="RightCtrl" Modifiers="Ctrl" Command="{StaticResource commandRCtrl}"></KeyBinding>
         <!--<KeyBinding Key="RightShift" Modifiers="Shift" Command="{StaticResource commandRShift}"></KeyBinding>-->
-        <!--<KeyBinding Key="DbeEnterWordRegisterMode" Command="{StaticResource commandEnter}"></KeyBinding>-->
-        <!--<KeyBinding Key="Backspace" Command="{StaticResource commandBackSpace}"></KeyBinding>-->
+        <!--<KeyBinding Key="Enter" Command="{StaticResource commandEnter}"></KeyBinding>-->
+        <KeyBinding Key="Backspace" Command="{StaticResource commandBackSpace}"></KeyBinding>
     </Window.InputBindings>
     
     <Grid>
@@ -297,17 +290,18 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Name="txtBlSpeed">Speed:</TextBlock>
-                <TextBlock Grid.Column="1" Name="txtBlFails">Fails:</TextBlock>
+                <TextBlock Grid.Column="0" Name="txtBlSpeed" FontFamily="Arial" FontSize="14" FontStyle="Italic">Speed:</TextBlock>
+            <TextBlock Grid.Column="1" Name="txtBlFails" FontFamily="Arial" FontSize="14" FontStyle="Italic">Fails:</TextBlock>
             <Grid Grid.Column="2" Name="gridSettings2" HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Name="txtBlDifficult">Difficulty:</TextBlock>
+                <TextBlock Grid.Column="0" Name="txtBlDifficult" FontFamily="Arial" FontSize="14" FontStyle="Italic">Difficulty:</TextBlock>
                 <Slider Grid.Column="1" Name="sliderDifficult" ValueChanged="sliderDifficult_ValueChanged" Maximum="36"></Slider>
             </Grid>
-            <CheckBox Grid.Column="3" Name="chBoxUpper" Checked="chBoxUpper_Checked" Unchecked="chBoxUpper_Unchecked">Case Sensitive</CheckBox>
+            <CheckBox Grid.Column="3" Name="chBoxUpper" Checked="chBoxUpper_Checked" Unchecked="chBoxUpper_Unchecked"
+                      FontFamily="Arial" FontSize="14" FontStyle="Italic">Case Sensitive</CheckBox>
         </Grid>
         <Grid Grid.Row="1" Name="StPanelButtons" Margin="0,5,0,3">
             <Grid.ColumnDefinitions>
@@ -337,7 +331,7 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" x:Name="txtBlShowText" Background="Aqua"></TextBlock>
-                <TextBlock Grid.Row="1" x:Name="txtBlInputText" Background="Aqua"></TextBlock>
+                <TextBox Grid.Row="1" x:Name="txtBlInputText" Background="Aqua" AcceptsReturn="True" BorderBrush="Aqua"></TextBox>
             </Grid>
             <Grid Grid.Row="1" Name="firstRowKyeboard">
                 <Grid.ColumnDefinitions>
@@ -481,7 +475,7 @@
                 <Button Grid.Column="20" Grid.ColumnSpan="2" Name="btnL" Background="Yellow">l</Button>
                 <Button Grid.Column="22" Grid.ColumnSpan="2" Name="btnPointComma" Background="GreenYellow">;</Button>
                 <Button Grid.Column="24" Grid.ColumnSpan="2" Name="btnUpperComma" Background="GreenYellow">'</Button>
-                <Button Grid.Column="26" Grid.ColumnSpan="4" Name="btnEnter" FontSize="20">Enter</Button>
+                <Button Grid.Column="26" Grid.ColumnSpan="4" Name="btnEnter" FontSize="20" IsEnabled="True" Click="btnEnter_Click">Enter</Button>
             </Grid>
             <Grid Grid.Row="4" Name="forthRowKyeboard">
                 <Grid.ColumnDefinitions>
