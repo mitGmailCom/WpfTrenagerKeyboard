@@ -9,7 +9,6 @@
         PreviewKeyUp="wind_PreviewKeyUp" MinHeight="450" MinWidth="850" SizeChanged="wind_SizeChanged">
 
     <Window.Resources>
-       
     </Window.Resources>
     
     <Window.CommandBindings>
@@ -311,7 +310,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="2" Name="btnStart" Style="{StaticResource StyleTemplateManage}" HorizontalContentAlignment="Center"
-                    Click="btnStart_Click" IsEnabledChanged="btnStart_IsEnabledChanged">Start</Button>
+                    Click="btnStart_Click" IsEnabledChanged="btnStart_IsEnabledChanged" IsDefault="True">Start</Button>
             <Button Grid.Column="3" Name="btnStop" Style="{StaticResource StyleTemplateManage}" HorizontalContentAlignment="Center"
                     Margin="3,0,0,0" Click="btnStop_Click" IsEnabledChanged="btnStop_IsEnabledChanged">Stop</Button>
         </Grid>
@@ -331,7 +330,8 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" x:Name="txtBlShowText" Background="Aqua"></TextBlock>
-                <TextBox Grid.Row="1" x:Name="txtBlInputText" Background="Aqua" AcceptsReturn="True" BorderBrush="Aqua"></TextBox>
+                <TextBox Grid.Row="1" x:Name="txtBlInputText" Background="Aqua" AcceptsReturn="True"
+                         BorderBrush="Aqua" TextChanged="txtBlInputText_TextChanged"></TextBox>
             </Grid>
             <Grid Grid.Row="1" Name="firstRowKyeboard">
                 <Grid.ColumnDefinitions>
