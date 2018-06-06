@@ -67,9 +67,10 @@
                 <Setter TargetName="border" Property="BorderBrush" Value="Yellow"></Setter>-->
                 <Setter Property="RenderTransform">
                     <Setter.Value>
-                        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                        <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
                     </Setter.Value>
                 </Setter>
+                <Setter Property="Opacity" Value="0.6"></Setter>
                 <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
             </Trigger>
         </Style.Triggers>
@@ -140,7 +141,6 @@
     <RoutedUICommand x:Key="commandComma" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandPoint" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandDevide" Text="Text"></RoutedUICommand>
-    
 
     <RoutedUICommand x:Key="commandTab" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandCL" Text="Text"></RoutedUICommand>
@@ -155,8 +155,6 @@
     <!--<RoutedUICommand x:Key="commandRShift" Text="Text"></RoutedUICommand>-->
     <!--<RoutedUICommand x:Key="commandEnter" Text="Text"></RoutedUICommand>-->
     <RoutedUICommand x:Key="commandBackSpace" Text="Text"></RoutedUICommand>
-    
-    
     
     <RoutedUICommand x:Key="commandShiftTilda" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandShift1" Text="Text"></RoutedUICommand>
@@ -205,11 +203,6 @@
     <RoutedUICommand x:Key="commandShiftComma" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandShiftPoint" Text="Text"></RoutedUICommand>
     <RoutedUICommand x:Key="commandShiftDevide" Text="Text"></RoutedUICommand>
-    
     <!--<RoutedUICommand x:Key="commandShiftQ" Text="Text"></RoutedUICommand>-->
-
-
-
-
 
 </ResourceDictionary>

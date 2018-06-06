@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTrenagerKeyboard"
         mc:Ignorable="d"
-        Title="Keybord Trainer" Name="wind" Left="0" Top="0" Initialized="wind_Initialized" KeyDown="wind_PreviewKeyDown"
+        Title="Keybord Trainer" Name="wind" Left="0" Top="0" Initialized="wind_Initialized" KeyDown="wind_KeyDown"
         PreviewKeyUp="wind_PreviewKeyUp" MinHeight="450" MinWidth="850" SizeChanged="wind_SizeChanged">
 
     <Window.Resources>
@@ -80,9 +80,7 @@
         <CommandBinding Command="{StaticResource commandPlus}" Executed="CommandBinding_Executed_Plus"></CommandBinding>
 
 
-
         <!--Row namber 2-->
-        <!--<CommandBinding Command="{StaticResource command1}" Executed="CommandBinding_Executed"></CommandBinding>-->
         <CommandBinding Command="{StaticResource commandQ}" Executed="CommandBinding_Executed_Q"></CommandBinding>
         <CommandBinding Command="{StaticResource commandWW}" Executed="CommandBinding_Executed_W"></CommandBinding>
         <CommandBinding Command="{StaticResource commandE}" Executed="CommandBinding_Executed_E"></CommandBinding>
@@ -96,7 +94,6 @@
         <CommandBinding Command="{StaticResource commandLSqSkoba}" Executed="CommandBinding_Executed_SqueSkobaL"></CommandBinding>
         <CommandBinding Command="{StaticResource commandRSqSkoba}" Executed="CommandBinding_Executed_SqueSkobaR"></CommandBinding>
         <CommandBinding Command="{StaticResource commandSlew}" Executed="CommandBinding_Executed_BackSlew"></CommandBinding>
-
 
 
         <!--Row namber 3-->
@@ -158,7 +155,6 @@
         <KeyBinding Key="D0" Command="{StaticResource command0}"></KeyBinding>
         <KeyBinding Key="OemMinus" Command="{StaticResource commandMinus}"></KeyBinding>
         <KeyBinding Key="OemPlus" Command="{StaticResource commandPlus}"></KeyBinding>
-        <!--<KeyBinding Key="Backspace" Command="{StaticResource commandBackSpace}"></KeyBinding>-->
 
         <KeyBinding Key="Oem3" Modifiers="Shift" Command="{StaticResource commandShiftTilda}"></KeyBinding>
         <KeyBinding Key="D1" Modifiers="Shift" Command="{StaticResource commandShift1}"></KeyBinding>
@@ -173,7 +169,6 @@
         <KeyBinding Key="D0" Modifiers="Shift" Command="{StaticResource commandShift0}"></KeyBinding>
         <KeyBinding Key="OemMinus" Modifiers="Shift" Command="{StaticResource commandShiftMinus}"></KeyBinding>
         <KeyBinding Key="OemPlus" Modifiers="Shift" Command="{StaticResource commandShiftPlus}"></KeyBinding>
-
 
 
         <!--Row namber 2-->
@@ -218,7 +213,6 @@
         <KeyBinding Key="L" Command="{StaticResource commandL}"></KeyBinding>
         <KeyBinding Key="Oem1" Command="{StaticResource commandPointComma}"></KeyBinding>
         <KeyBinding Key="OemQuotes" Command="{StaticResource commandUpperRegComma}"></KeyBinding>
-        <!--<KeyBinding Key="Return" Command="{StaticResource commandEnter}"></KeyBinding>-->
 
         <KeyBinding Key="A" Modifiers="Shift" Command="{StaticResource commandShiftA}"></KeyBinding>
         <KeyBinding Key="S" Modifiers="Shift" Command="{StaticResource commandShiftS}"></KeyBinding>
@@ -231,7 +225,6 @@
         <KeyBinding Key="L" Modifiers="Shift" Command="{StaticResource commandShiftL}"></KeyBinding>
         <KeyBinding Key="Oem1" Modifiers="Shift" Command="{StaticResource commandShiftPointComma}"></KeyBinding>
         <KeyBinding Key="OemQuotes" Modifiers="Shift" Command="{StaticResource commandShiftUpComma}"></KeyBinding>
-        <!--<KeyBinding Key="Return" Command="{StaticResource commandEnter}"></KeyBinding>-->
 
 
         <!--Row namber 4-->
@@ -258,7 +251,6 @@
         <KeyBinding Key="OemQuestion" Modifiers="Shift" Command="{StaticResource commandShiftDevide}"></KeyBinding>
 
 
-
         <!--Row namber 5 and Modifiers-->
         <KeyBinding Key="Tab" Command="{StaticResource commandTab}"></KeyBinding>
         <KeyBinding Key="Capital" Command="{StaticResource commandCL}"></KeyBinding>
@@ -266,7 +258,7 @@
         <KeyBinding Key="LeftCtrl" Modifiers="Ctrl" Command="{StaticResource commandLCtrl}"></KeyBinding>
         <KeyBinding Key="LWin" Command="{StaticResource commandLWin}"></KeyBinding>
         <KeyBinding Key="LeftAlt" Modifiers="Alt" Command="{StaticResource commandLAlt}"></KeyBinding>
-        <KeyBinding Gesture="Space" Command="{StaticResource commandSpace}"></KeyBinding>
+        <KeyBinding Key="Space" Command="{StaticResource commandSpace}"></KeyBinding>
         <KeyBinding Key="RightAlt" Modifiers="Alt" Command="{StaticResource commandRAlt}"></KeyBinding>
         <KeyBinding Key="RWin" Command="{StaticResource commandRWin}"></KeyBinding>
         <KeyBinding Key="RightCtrl" Modifiers="Ctrl" Command="{StaticResource commandRCtrl}"></KeyBinding>

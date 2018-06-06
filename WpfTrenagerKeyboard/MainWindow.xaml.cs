@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
+
 namespace WpfTrenagerKeyboard
 {
     /// <summary>
@@ -314,14 +315,17 @@ namespace WpfTrenagerKeyboard
             FormingMasErrors();
             Sec = 0;
             txtBlInputText.Clear();
-            if (Str != null)
-                showStr();
             btnStart.IsEnabled = false;
             btnStop.IsEnabled = true;
             timer.Start();
             btnStop.Content = "Stop";
-            //wind.Focus();
             btnStart.Focus();
+            if (txtBlShowText.Text != null && txtBlShowText.Text != "")
+            {
+                txtBlShowText.Text = "";
+                txtBlShowText.Inlines.Add(new Run($"{Str[0]}") { FontWeight = FontWeights.Bold, TextDecorations = TextDecorations.Underline });
+                txtBlShowText.Inlines.Add(new Run($"{Str.Substring(1)}"));
+            }
         }
 
         // обрабатываем событие клика по btnStop
@@ -339,14 +343,13 @@ namespace WpfTrenagerKeyboard
 
         private void changeViewShift(Button btn, double value)
         {
-            System.Threading.Thread.Sleep(45);
+            System.Threading.Thread.Sleep(65);
             FlagForRightShift = false;
             btn.RenderTransformOrigin = new Point(0.5, 0.5);
             ScaleTransform myScaleTransform = new ScaleTransform();
             myScaleTransform.ScaleY = value;
             myScaleTransform.ScaleX = value;
             btn.RenderTransform = myScaleTransform;
-            //btn.RenderTransformOrigin = new Point(0.5, 0.5);
         }
 
         private void changeViewToUpKeys()
@@ -376,9 +379,8 @@ namespace WpfTrenagerKeyboard
         #region Events
 
         // обработка события нажатия клавиши на клавиатуре
-        private void wind_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void wind_KeyDown(object sender, KeyEventArgs e)
         {
-            //txtBlShowText.Text += e.Key.ToString() + " " + e.RoutedEvent.ToString();
             if (!FlagContinueExers)
                 return;
 
@@ -391,6 +393,8 @@ namespace WpfTrenagerKeyboard
 
                     // Смена раскладки на Верхний регистр
                     changeViewToUpKeys();
+
+                    btnLShift.Opacity = 0.6;
                 }
 
                 if (e.Key == Key.RightShift)
@@ -400,22 +404,20 @@ namespace WpfTrenagerKeyboard
 
                     // Смена раскладки на Верхний регистр
                     changeViewToUpKeys();
+
+                    btnRShift.Opacity = 0.6;
                 }
                 FlagPressShift = true;
             }
 
             if (e.Key == Key.Enter)
-            {
                 btnEnter.Focus();
-            }
-            //FlagPressShift = true;
         }
 
 
         // обработка события отпускания клавиши на клавиатуре
         private void wind_PreviewKeyUp(object sender, KeyEventArgs e)
         {
-            //txtBlShowText.Text += e.Key.ToString() + " " + e.RoutedEvent.ToString();
             if (!FlagContinueExers)
             {
                 btnStart.Focus();
@@ -447,6 +449,7 @@ namespace WpfTrenagerKeyboard
             {
                 btnEnter.Focusable = true;
                 changeViewShift(btnEnter, 0.9);
+                btnEnter.Opacity = 0.6;
                 if (txtBlShowText.Text.Length <= txtBlInputText.Text.Length & txtBlShowText.Text.Length != 0)
                 {
                     btnStop.Focus();
@@ -454,11 +457,10 @@ namespace WpfTrenagerKeyboard
                     return;
                 }
                 System.Threading.Thread.Sleep(3);
-                //typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { true });
                 ButtonAutomationPeer peer = new ButtonAutomationPeer(btnEnter);
                 IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
                 invokeProv.Invoke();
-
+                
             }
             #endregion
 
@@ -471,6 +473,8 @@ namespace WpfTrenagerKeyboard
 
                 // Смена раскладки на нижний регистр
                 changeViewToLoKeys();
+
+                btnLShift.Opacity = 1.0;
             }
 
 
@@ -482,6 +486,8 @@ namespace WpfTrenagerKeyboard
 
                 // Смена раскладки на нижний регистр
                 changeViewToLoKeys();
+
+                btnRShift.Opacity = 1.0;
             }
 
 
@@ -633,7 +639,6 @@ namespace WpfTrenagerKeyboard
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLAlt, new object[] { false });
             if (e.Key == Key.Space)
             {
-                buttonSpace.Focusable = true;
                 buttonSpace.Focus();
                 typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(buttonSpace, new object[] { false });
             }
@@ -650,6 +655,8 @@ namespace WpfTrenagerKeyboard
             #endregion
 
             FlagPressShift = false;
+            buttonSpace.Focus();
+            tt = null;
         }
 
 
@@ -892,7 +899,6 @@ namespace WpfTrenagerKeyboard
 
         private void CommandBinding_Executed_Q(object sender, ExecutedRoutedEventArgs e)
         {
-            //changeViewShift(btnEnter, 1.0);
             btnQ.Focus();
 
             if (!flagPressButtun)
@@ -1367,14 +1373,6 @@ namespace WpfTrenagerKeyboard
 
         private void CommandBinding_Executed_LShift(object sender, ExecutedRoutedEventArgs e)
         {
-            //btnQ.RenderTransformOrigin = new Point(0.5, 0.5);
-            //ScaleTransform myScaleTransform = new ScaleTransform();
-            //myScaleTransform.ScaleY = 0.9;
-            //myScaleTransform.ScaleX = 0.9;
-            //btnQ.RenderTransform = myScaleTransform;
-
-            
-
             btnLShift.Focus();
 
             if (flagPressButtun)
@@ -1383,20 +1381,6 @@ namespace WpfTrenagerKeyboard
             }
 
             typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnLShift, new object[] { true });
-
-            
-
-            //string tmpSymbol = null;
-
-            //if (!FlagForShift)
-            //    for (int i = 0; i < ListButtonsWithKeys.Count; i++)
-            //    {
-            //        tmpSymbol = ListButtonsWithKeys[i].Content.ToString();
-            //        ListButtonsWithKeys[i].Content = ListKeysInKeyboard2[ListKeysInKeyboard2.IndexOf(tmpSymbol) + 1];
-            //    }
-            //FlagForShift = true;
-            //if (btnLShift.IsKeyboardFocused)
-            //    Keyboard.ClearFocus();
         }
 
         private void CommandBinding_Executed_LCtrl(object sender, ExecutedRoutedEventArgs e)
@@ -1856,7 +1840,6 @@ namespace WpfTrenagerKeyboard
 
         private void ShiftPlusKey()
         {
-            //FlagForShiftPlusKey = true;
             if (Keyboard.IsKeyDown(Key.LeftShift))
             {
                 btnLShift.RenderTransformOrigin = new Point(0.5, 0.5);
@@ -1895,10 +1878,7 @@ namespace WpfTrenagerKeyboard
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
             changeViewShift(btnEnter, 1.0);
-            //typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(btnEnter, new object[] { true });
-            //ButtonAutomationPeer peer = new ButtonAutomationPeer(btnEnter);
-            //IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
-            //invokeProv.Invoke();
+            btnEnter.Opacity = 1.0;
         }
 
 
@@ -1919,22 +1899,14 @@ namespace WpfTrenagerKeyboard
                     if (txtBlInputText.Text.Length > 1)
                     {
                         char t, tt;
-
                         t = CopyString[txtBlInputText.Text.Length - 1];
                         tt = txtBlInputText.Text[txtBlInputText.Text.Length - 1];
 
                         if (CopyString[txtBlInputText.Text.Length - 1] != txtBlInputText.Text[txtBlInputText.Text.Length - 1])
-                        {
-                            MasErrors[txtBlInputText.Text.Length - 1] = 1;
-                            FormingStrWithErrors();
-                            InputErrors++;
-                        }
+                            WriteErrInMasErrors();
 
                         if (CopyString[txtBlInputText.Text.Length - 1] == txtBlInputText.Text[txtBlInputText.Text.Length - 1])
-                        {
-                            MasErrors[txtBlInputText.Text.Length - 1] = 0;
-                            FormingStrWithErrors();
-                        }
+                            WriteSymbolInMasErrors();
                     }
 
 
@@ -1943,17 +1915,10 @@ namespace WpfTrenagerKeyboard
                         txtBlShowText.Text = "";
 
                         if (CopyString[txtBlInputText.Text.Length - 1] != txtBlInputText.Text[txtBlInputText.Text.Length - 1])
-                        {
-                            MasErrors[txtBlInputText.Text.Length - 1] = 1;
-                            FormingStrWithErrors();
-                            InputErrors++;
-                        }
+                            WriteErrInMasErrors();
 
                         if (CopyString[txtBlInputText.Text.Length - 1] == txtBlInputText.Text[txtBlInputText.Text.Length - 1])
-                        {
-                            MasErrors[txtBlInputText.Text.Length - 1] = 0;
-                            FormingStrWithErrors();
-                        }
+                            WriteSymbolInMasErrors();
                     }
                 }
 
@@ -1974,6 +1939,22 @@ namespace WpfTrenagerKeyboard
             
         }
 
+        private void WriteErrInMasErrors()
+        {
+            MasErrors[txtBlInputText.Text.Length - 1] = 1;
+            if (txtBlInputText.Text.Length < CopyString.Length)
+                MasErrors[txtBlInputText.Text.Length] = 2;
+            FormingStrWithErrors();
+            InputErrors++;
+        }
+
+        private void WriteSymbolInMasErrors()
+        {
+            MasErrors[txtBlInputText.Text.Length - 1] = 0;
+            if (txtBlInputText.Text.Length < CopyString.Length)
+                MasErrors[txtBlInputText.Text.Length] = 2;
+            FormingStrWithErrors();
+        }
 
         private void FormingStrWithErrors()
         {
@@ -1988,8 +1969,14 @@ namespace WpfTrenagerKeyboard
                 {
                     txtBlShowText.Inlines.Add(new Run($"{CopyString[i]}") { FontWeight = FontWeights.Bold, Foreground = Brushes.Red });
                 }
+
+                if (MasErrors[i] == 2)
+                {
+                    txtBlShowText.Inlines.Add(new Run($"{CopyString[i]}") { FontWeight = FontWeights.Bold, TextDecorations = TextDecorations.Underline});
+                }
             }
         }
+
     }
 }
  
